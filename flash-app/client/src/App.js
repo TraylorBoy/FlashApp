@@ -1,14 +1,28 @@
 import React, { Component } from "react";
 import getWeb3 from "./getWeb3";
-import { Heading, Flex, Box } from 'rimble-ui';
+
+import { Flex } from 'rimble-ui';
+import Navbar from './components/Navbar';
 
 import "./App.css";
 
 class App extends Component {
-  state = { web3: null, accounts: null, netId: null };
+  state = { web3: null, accounts: null };
 
-  componentDidMount = async () => {
-    try {
+    constructor(props) {
+      super(props);
+
+      this.state = {
+
+        web3: null,
+        accounts: null,
+        netId: 0
+
+      }
+
+    }
+
+    /*try {
 
       // Get network provider and web3 instance.
       const web3 = await getWeb3();
@@ -20,24 +34,17 @@ class App extends Component {
 
     } catch (error) {
       // Catch any errors for any of the above operations.
-      alert(
+      console.log(
         `Failed to load web3, accounts, or contract. Check console for details.`,
       );
       console.error(error);
-    }
-  };
+    }*/
+
 
   render() {
-    if (!this.state.web3) {
-      return <div>Loading Web3, accounts, and contract...</div>;
-    }
     return (
       <div className="App">
-        <Flex>
-          <Box p={3} width={1}>
-            <Heading as="h1">FlashApp</Heading>
-          </Box>
-        </Flex>
+        <Navbar isConnected={false} netId={this.state.netId}/>
       </div>
     );
   }

@@ -1190,10 +1190,26 @@
   "resolved" "https://registry.npmjs.org/@redux-saga/types/-/types-1.1.0.tgz"
   "version" "1.1.0"
 
+"@rimble/connection-banner@^1.2.3":
+  "integrity" "sha512-IRvOckxfZOyi4LVmDA4N8xJ1ZtZbPyAlp5JXHfGeTOuKPb2BTW2R/yT8niyl7+CddbnkVCJouu2w0TbpX3Mk9w=="
+  "resolved" "https://registry.npmjs.org/@rimble/connection-banner/-/connection-banner-1.2.3.tgz"
+  "version" "1.2.3"
+  dependencies:
+    "@rimble/utils" "^1.2.3"
+    "rimble-ui" "^0.9.1"
+
 "@rimble/icons@^1.0.2":
   "integrity" "sha512-v+qh/Bb3HFF9y1Gy/v1kHXqFJxf52jxwBL2mi1DPpR9pUaCsOZzmuw+DIHt9XIPfq19C2iuIQ6tcLhxTDryWPQ=="
   "resolved" "https://registry.npmjs.org/@rimble/icons/-/icons-1.2.0.tgz"
   "version" "1.2.0"
+
+"@rimble/utils@^1.2.3":
+  "integrity" "sha512-2KEN5+t9P8LsFijslluz1axoYoJQGMAlVdaW7WFFplvArCzjvTIoAeCdtNoZt8JyJi7ccxbzamavY5vP8rQQDw=="
+  "resolved" "https://registry.npmjs.org/@rimble/utils/-/utils-1.2.3.tgz"
+  "version" "1.2.3"
+  dependencies:
+    "bowser" "^2.2.0"
+    "rimble-ui" "^0.9.1"
 
 "@sindresorhus/is@^0.14.0":
   "integrity" "sha512-9NET910DNaIPngYnLLPeg+Ogzqsi9uM4mSboU5y6p8S5DzMTVEsJZrawi+BoDNUVBa2DhJqQYUFvMDfgU062LQ=="
@@ -2417,6 +2433,11 @@
   "integrity" "sha1-aN/1++YMUes3cl6p4+0xDcwed24="
   "resolved" "https://registry.npmjs.org/boolbase/-/boolbase-1.0.0.tgz"
   "version" "1.0.0"
+
+"bowser@^2.2.0":
+  "integrity" "sha512-AlcaJBi/pqqJBIQ8U9Mcpc9i8Aqxn88Skv5d+xBX006BY5u8N3mGLHa5Lgppa7L/HfwgwLgZ6NYs+Ag6uUmJRA=="
+  "resolved" "https://registry.npmjs.org/bowser/-/bowser-2.11.0.tgz"
+  "version" "2.11.0"
 
 "brace-expansion@^1.1.7":
   "integrity" "sha512-iCuPHDFgrHX7H2vEI/5xpz07zSHB00TpugqhmYtVmMO6518mCuRMoOYFldEBl0g187ufozdaHgWKcYFb61qGiA=="
@@ -9060,7 +9081,7 @@
     "kleur" "^3.0.3"
     "sisteransi" "^1.0.3"
 
-"prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
+"prop-types@^15.5.4", "prop-types@^15.6.0", "prop-types@^15.6.2", "prop-types@^15.7.2":
   "integrity" "sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ=="
   "resolved" "https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz"
   "version" "15.7.2"
@@ -9299,7 +9320,7 @@
     "strip-ansi" "5.2.0"
     "text-table" "0.2.0"
 
-"react-dom@^16.9.0", "react-dom@>= 16.8.0", "react-dom@16.11.0":
+"react-dom@^15.0.0 || ^16.0.0", "react-dom@^16.9.0", "react-dom@>= 16.8.0", "react-dom@16.11.0":
   "integrity" "sha512-nrRyIUE1e7j8PaXSPtyRKtz+2y9ubW/ghNgqKFHHAHaeP0fpF5uXR+sq8IMRHC+ZUxw7W9NyCDTBtwWxvkb0iA=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.11.0.tgz"
   "version" "16.11.0"
@@ -9385,7 +9406,7 @@
   optionalDependencies:
     "fsevents" "2.0.7"
 
-"react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^15.5.3 || ^16.0.0", "react@^16.3.2", "react@^16.9.0", "react@>= 16.8.0", "react@16.11.0":
+"react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^15.0.0 || ^16.0.0", "react@^15.5.3 || ^16.0.0", "react@^16.3.2", "react@^16.9.0", "react@>= 16.8.0", "react@16.11.0":
   "integrity" "sha512-M5Y8yITaLmU0ynd0r1Yvfq98Rmll6q8AxaEe88c8e7LxO8fZ2cNgmFt0aGAS9wzf1Ao32NKXtCl+/tVVtkxq6g=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.11.0.tgz"
   "version" "16.11.0"
@@ -9944,6 +9965,22 @@
     "set-value" "^3.0.1"
     "styled-system" "^5.1.5"
 
+"rimble-ui@^0.9.1":
+  "integrity" "sha512-brhTTh4UwpRZusqclcqrbj2N9zgejIxMty+/gIdCLT0Gsgfz1OZes0OeFDFjqVYCHK5DrRiaCjybpCG+rtfNfw=="
+  "resolved" "https://registry.npmjs.org/rimble-ui/-/rimble-ui-0.9.8.tgz"
+  "version" "0.9.8"
+  dependencies:
+    "@d8660091/react-popper" "^1.0.4"
+    "@svgr/rollup" "^4.2.0"
+    "clipboard" "^2.0.4"
+    "ethereum-blockies" "^0.1.1"
+    "mixin-deep" "^2.0.1"
+    "polished" "^3.2.0"
+    "qrcode.react" "^0.9.3"
+    "rmdi" "^1.0.1"
+    "set-value" "^3.0.1"
+    "styled-system" "^4.1.0"
+
 "rimraf@^2.2.8", "rimraf@^2.5.4", "rimraf@^2.6.3", "rimraf@2.6.3":
   "integrity" "sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA=="
   "resolved" "https://registry.npmjs.org/rimraf/-/rimraf-2.6.3.tgz"
@@ -9970,6 +10007,13 @@
   "version" "2.2.4"
   dependencies:
     "bn.js" "^4.11.1"
+
+"rmdi@^1.0.1":
+  "integrity" "sha512-1oxFIH6/mZrw6HN6M0PCogMf783FUKOD2tZW5HyX+Ok6nUodd4kob2UvzzFtaEx7GuD8KzaQPid/pbFjO5D7uw=="
+  "resolved" "https://registry.npmjs.org/rmdi/-/rmdi-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "styled-system" "^2.0.0"
 
 "rollup-pluginutils@^2.8.1":
   "integrity" "sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ=="
@@ -10860,7 +10904,7 @@
     "loader-utils" "^1.2.3"
     "schema-utils" "^2.0.1"
 
-"styled-components@^5.3.0", "styled-components@>= 2", "styled-components@>= 4":
+"styled-components@^5.3.0", "styled-components@>= 2", "styled-components@>= 4", "styled-components@>=2.0 || >=3.0":
   "integrity" "sha512-bPJKwZCHjJPf/hwTJl6TbkSZg/3evha+XPEizrZUGb535jLImwDUdjTNxXqjjaASt2M4qO4AVfoHJNe3XB/tpQ=="
   "resolved" "https://registry.npmjs.org/styled-components/-/styled-components-5.3.0.tgz"
   "version" "5.3.0"
@@ -10875,6 +10919,21 @@
     "hoist-non-react-statics" "^3.0.0"
     "shallowequal" "^1.1.0"
     "supports-color" "^5.5.0"
+
+"styled-system@^2.0.0":
+  "integrity" "sha512-lGAh/8tC70f5hBUD7w0UOWCKyOBK2AzzWKu9BGzqla/Yjx8PzrvaciA7uATbm493hXTfRrecSdLdrIUET5IYnA=="
+  "resolved" "https://registry.npmjs.org/styled-system/-/styled-system-2.3.6.tgz"
+  "version" "2.3.6"
+  dependencies:
+    "prop-types" "^15.6.0"
+
+"styled-system@^4.1.0":
+  "integrity" "sha512-44X7n09gDvwx7yjquEXsjiNALK0dxGgAJdpO5cb/PdL+D4mhSLKWig4/EhH4vHJLbwu/kumURHyvKxygaBfg0A=="
+  "resolved" "https://registry.npmjs.org/styled-system/-/styled-system-4.2.4.tgz"
+  "version" "4.2.4"
+  dependencies:
+    "@babel/runtime" "^7.4.2"
+    "prop-types" "^15.7.2"
 
 "styled-system@^5.0.0-8", "styled-system@^5.1.5":
   "integrity" "sha512-7VoD0o2R3RKzOzPK0jYrVnS8iJdfkKsQJNiLRDjikOpQVqQHns/DXWaPZOH4tIKkhAT7I6wIsy9FWTWh2X3q+A=="
