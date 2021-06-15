@@ -9,7 +9,7 @@ function Navbar(props) {
     <Flex alignItems="center" borderBottom="1px solid">
 
       <Box p={3} width={ 1 / 4 }>
-        <p>Connected: { props.isConnected ? "Yes" : "No" }</p>
+        <p>Connected: { props.isConnected ? props.userAddress : "" }</p>
       </Box>
 
       <Box p={3} width={ 2 / 4 }>
