@@ -18,8 +18,7 @@ abstract contract FlashApp is FlashLoanReceiverBase {
 
   function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address initiator, bytes calldata params) public override returns (bool operatorionSuccessful) {
 
-    // TODO: Flashloan operation
-    return false;
+    revert("TODO: Flashloan Operation");
 
 
     for (uint i = 0; i < assets.length; i++) {
