@@ -6,16 +6,33 @@ import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from './Interface
 import { FlashLoanReceiverBase } from './FlashLoanReceiverBase.sol';
 
 contract FlashApp is FlashLoanReceiverBase {
-  address public owner;
-  mapping (address => uint256) accounts;
-
-  // TODO: Events
+  address payable owner;
+  mapping (address => uint256) private accounts;
 
   constructor(ILendingPoolAddressesProvider provider) FlashLoanReceiverBase(provider) public {
 
     // Set contract owner
-    owner = msg.sender;
+    owner = payable(msg.sender);
 
+  }
+
+  // TODO: Finish the rest of events
+  event Deposit(address indexed from, uint256 amount);
+
+  // Allows contract to receive ether
+  receive() external payable {}
+
+  // Selfdestruct contract and return funds to owner
+  function flashBang() public {
+
+    // Only owner can call this function
+    require(msg.sender == owner);
+
+    // Terminate contract, send owner funds
+    // used to deploy
+    selfdestruct(owner);
+
+    // TODO: Emit event
   }
 
   // Allow user to deposit funds to contract
@@ -23,14 +40,13 @@ contract FlashApp is FlashLoanReceiverBase {
   function deposit(uint256 amount) public payable {
 
     // Validate amount
-    require(amount > 0 && msg.sender.balance > amount, "Amount less than 0 or wallet balance does not have amount to deposit");
+    require(amount > 0, "Amount less than 0");
     require(amount == msg.value, "Amount is not the same as value sent");
 
     // Update accounts with new amount deposited
     accounts[msg.sender] = amount;
 
-
-    // TODO: Emit event
+    emit Deposit(msg.sender, amount);
 
   }
 
@@ -42,7 +58,7 @@ contract FlashApp is FlashLoanReceiverBase {
     require(accounts[msg.sender] >= amount, "Balance less than amount you are trying to withdraw");
 
     // Transfer amount to user
-    require(msg.sender.send(accounts[msg.sender]), "Failed to withdraw amount");
+    require(payable(msg.sender).send(accounts[msg.sender]), "Failed to withdraw amount");
 
     // Update accounts
     accounts[msg.sender] -= amount;
@@ -54,7 +70,7 @@ contract FlashApp is FlashLoanReceiverBase {
 
   // Once flash loan is received, this method is excuted
   // After flashloan operation is completed, the amount + fee is paid back to the lending pool
-  function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address, bytes calldata) public override returns (bool operatorionSuccessful) {
+  function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address, bytes calldata) external override returns (bool operatorionSuccessful) {
 
     // TODO
     revert("TODO: Flashloan Operation");
