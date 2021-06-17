@@ -9,6 +9,7 @@ contract FlashApp is FlashLoanReceiverBase {
   address payable owner;
   mapping (address => uint256) private accounts;
 
+  // Lending pool address that will provide the loan should be passed on creation
   constructor(ILendingPoolAddressesProvider provider) FlashLoanReceiverBase(provider) public {
 
     // Set contract owner
