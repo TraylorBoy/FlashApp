@@ -7,21 +7,38 @@ import { FlashLoanReceiverBase } from './FlashLoanReceiverBase.sol';
 
 abstract contract FlashApp is FlashLoanReceiverBase {
   address public owner;
+  mapping (address => uint256) accounts;
 
   // TODO: Events
 
-  constructor(ILendingPoolAddressesProvider provider) public {
+  constructor(ILendingPoolAddressesProvider) public {
 
+    // Set contract owner
     owner = msg.sender;
 
   }
 
-  function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address initiator, bytes calldata params) public override returns (bool operatorionSuccessful) {
+  // Allow user to deposit funds + fee to contract for flash loan
+  function deposit(uint256 amount) public payable {
 
-    // TODO: Flashloan operation
-    return false;
+    // Validate amount
+    require(amount > 0 && msg.sender.balance > amount, "Amount less than 0 or wallet balance does not have amount to deposit");
+    require(amount == msg.value, "Amount is not the same as value sent");
+
+    // Update accounts with new amount deposited
+    accounts[address(msg.sender)] = amount;
 
 
+    // TODO: Emit event
+
+  }
+
+  function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address, bytes calldata) public override returns (bool operatorionSuccessful) {
+
+    // TODO
+    revert("TODO: Flashloan Operation");
+
+    // Pay debt back to lending pool (amount owed + fee)
     for (uint i = 0; i < assets.length; i++) {
 
       uint amountOwed = amounts[i].add(premiums[i]);
@@ -33,7 +50,11 @@ abstract contract FlashApp is FlashLoanReceiverBase {
 
   }
 
-  function initiateFlashLoan(address token, uint256 amount, uint256 mode, address sender, address receiver) public {
+  // Attempt to retrieve a flashloan for requested amount
+  function initiateFlashLoan(address token, uint256 amount, uint256 mode, address sender, address receiver, uint256 fee) public {
+
+    // Make sure user deposited amount to cover fee
+    require(accounts[sender] >= amount * fee);
 
     address[] memory assets = new address[](1);
     assets[0] = token;
