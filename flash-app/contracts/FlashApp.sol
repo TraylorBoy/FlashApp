@@ -5,20 +5,21 @@ pragma experimental ABIEncoderV2;
 import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from './Interfaces.sol';
 import { FlashLoanReceiverBase } from './FlashLoanReceiverBase.sol';
 
-abstract contract FlashApp is FlashLoanReceiverBase {
+contract FlashApp is FlashLoanReceiverBase {
   address public owner;
   mapping (address => uint256) accounts;
 
   // TODO: Events
 
-  constructor(ILendingPoolAddressesProvider) public {
+  constructor(ILendingPoolAddressesProvider provider) FlashLoanReceiverBase(provider) public {
 
     // Set contract owner
     owner = msg.sender;
 
   }
 
-  // Allow user to deposit funds + fee to contract for flash loan
+  // Allow user to deposit funds to contract
+  // Used for Flash Loan premium (fee) deposit
   function deposit(uint256 amount) public payable {
 
     // Validate amount
@@ -26,13 +27,33 @@ abstract contract FlashApp is FlashLoanReceiverBase {
     require(amount == msg.value, "Amount is not the same as value sent");
 
     // Update accounts with new amount deposited
-    accounts[address(msg.sender)] = amount;
+    accounts[msg.sender] = amount;
 
 
     // TODO: Emit event
 
   }
 
+  // Allow user to withdraw funds from contract
+  function withdraw(uint256 amount) public {
+
+    // Validate amount
+    require(amount > 0, "Amount must be greater than 0");
+    require(accounts[msg.sender] >= amount, "Balance less than amount you are trying to withdraw");
+
+    // Transfer amount to user
+    require(msg.sender.send(accounts[msg.sender]), "Failed to withdraw amount");
+
+    // Update accounts
+    accounts[msg.sender] -= amount;
+
+    // TODO: Emit event
+
+
+  }
+
+  // Once flash loan is received, this method is excuted
+  // After flashloan operation is completed, the amount + fee is paid back to the lending pool
   function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address, bytes calldata) public override returns (bool operatorionSuccessful) {
 
     // TODO
@@ -69,6 +90,8 @@ abstract contract FlashApp is FlashLoanReceiverBase {
     uint16 referralCode = 0;
 
     LENDING_POOL.flashLoan(receiver, assets, amounts, modes, sender, params, referralCode);
+
+    // TODO: Emit event
 
 
   }
