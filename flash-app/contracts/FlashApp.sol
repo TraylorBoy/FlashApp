@@ -2,6 +2,12 @@
 pragma solidity 0.6.12;
 pragma experimental ABIEncoderV2;
 
+// TASKS:
+// ☐ Finish tests
+// ☐ Document w/ natspec
+// ☐ Optimize & remove unnecessary code
+// ☐ Organize code sections w/ comment headers/dividers
+
 import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from './Interfaces.sol';
 import { FlashLoanReceiverBase } from './FlashLoanReceiverBase.sol';
 
@@ -20,6 +26,8 @@ contract FlashApp is FlashLoanReceiverBase {
   event Deposit(address indexed from, uint256 amount);
   event Withdrawal(address indexed from, uint256 amount);
   event FlashBang(address indexed from);
+  event LoanInitiated(address indexed from, address indexed to, address reserve, uint256 amount, uint256 fee);
+  event LoanCompleted(address reserve, uint256 amount, uint256 fee);
 
   // Allows contract to receive ether
   receive() external payable {}
@@ -80,18 +88,26 @@ contract FlashApp is FlashLoanReceiverBase {
     return accounts[account];
   }
 
+  // Query the lending pool for the current premium
+  function getFee() public view returns (uint) {
+    return LENDING_POOL.FLASHLOAN_PREMIUM_TOTAL();
+  }
+
   // Once flash loan is received, this method is excuted
   // After flashloan operation is completed, the amount + fee is paid back to the lending pool
+  // The method currently does nothing with the received loan(s), but emit events on successful
+  // loan completion for each of the assets loaned out
+  // Loan completion happens when the debt + premium fee is paid back to the lending pool
   function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address, bytes calldata) external override returns (bool operatorionSuccessful) {
-
-    // TODO
-    revert("TODO: Flashloan Operation");
 
     // Pay debt back to lending pool (amount owed + fee)
     for (uint i = 0; i < assets.length; i++) {
 
       uint amountOwed = amounts[i].add(premiums[i]);
       IERC20(assets[i]).approve(address(LENDING_POOL), amountOwed);
+
+      // Emit successful flashloan after debt is paid back for each asset
+      emit LoanCompleted(assets[i], amounts[i], premiums[i]);
 
     }
 
@@ -100,6 +116,7 @@ contract FlashApp is FlashLoanReceiverBase {
   }
 
   // Attempt to retrieve a flashloan for requested amount
+  // For this project, there will only be 1 asset selected for each loan operation
   function initiateFlashLoan(address token, uint256 amount, uint256 mode, address sender, address receiver, uint256 fee) public {
 
     // Make sure user deposited amount to cover fee
@@ -117,10 +134,11 @@ contract FlashApp is FlashLoanReceiverBase {
     bytes memory params = "";
     uint16 referralCode = 0;
 
+    // Initiate the flashloan with supplied params from client
     LENDING_POOL.flashLoan(receiver, assets, amounts, modes, sender, params, referralCode);
 
-    // TODO: Emit event
-
+    // Notify that a flashloan has been initiated
+    emit LoanInitiated(sender, receiver, token, amount, fee);
 
   }
 

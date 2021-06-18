@@ -58,6 +58,22 @@ contract("FlashApp", (accounts) => {
 
   });
 
+  it("should retrieve the current premium for flashloans", async () => {
+
+    const fee = await flashapp.getFee();
+
+    const current_fee = 0.09; // Current fee can be located at: https://docs.aave.com/developers/guides/flash-loans
+
+    return assert.equal(fee.toNumber() / 100, current_fee, "Fee query failed");
+
+  });
+
+  /*it("should initiate a flashloan and emit 2 events: LoanInitiated and LoanCompleted", async () => {
+
+    const fee = 0.009;
+
+  });*/
+
   it("should selfdestruct contract", async () => {
 
     await flashapp.flashBang().then(async (tx) => {
