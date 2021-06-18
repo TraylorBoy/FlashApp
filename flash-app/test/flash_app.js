@@ -11,10 +11,18 @@ contract("FlashApp", (accounts) => {
     wallet = accounts[0];
   });
 
+  it("should retrieve the balance of the contract", async () => {
+
+    const bal = await flashapp.balance();
+
+    assert.equal(bal, 0);
+
+  });
+
   it("should retrieve the balance of an account", async () => {
 
     const bal = await flashapp.balanceFor.call(wallet);
-    
+
     assert.equal(bal, 0);
 
   });
