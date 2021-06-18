@@ -7,8 +7,11 @@ contract("FlashApp", (accounts) => {
   let wallet;
 
   beforeEach("should setup the flashapp contract instance and test wallet account", async () => {
+
     flashapp = await FlashApp.deployed();
+
     wallet = accounts[0];
+
   });
 
   it("should retrieve the balance of the contract", async () => {
@@ -50,6 +53,16 @@ contract("FlashApp", (accounts) => {
         assert.equal(bal, 0);
 
       });
+
+    });
+
+  });
+
+  it("should selfdestruct contract", async () => {
+
+    await flashapp.flashBang().then(async (tx) => {
+
+      return assert.equal(tx.contractAddress, null, "Selfdestruct failed");
 
     });
 

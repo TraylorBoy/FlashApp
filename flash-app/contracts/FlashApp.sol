@@ -6,7 +6,7 @@ import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from './Interface
 import { FlashLoanReceiverBase } from './FlashLoanReceiverBase.sol';
 
 contract FlashApp is FlashLoanReceiverBase {
-  address payable owner;
+  address payable public owner;
   mapping (address => uint256) private accounts;
 
   // Lending pool address that will provide the loan should be passed on creation
