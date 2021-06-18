@@ -11,10 +11,17 @@ module.exports = {
       network_id: "*" // Match any network id
     },
     kovan: {
-      provider: function() {
-        return new HDWalletProvider(process.env.WALLET_KEY, process.env.KOVAN_URL);
+      provider: () => {
+        return new HDWalletProvider({
+          privateKeys: [process.env.WALLET_KEY],
+          providerOrUrl: process.env.KOVAN_URL,
+          numberOfAddresses: 1,
+          shareNonce: true,
+          derivationPath: "m/44'/1'/0'/0/"
+        })
       },
-      network_id: "42"
+      network_id: "42",
+      skipDryRun: true
     }
   },
   compilers: {
