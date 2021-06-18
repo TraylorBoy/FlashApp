@@ -29,11 +29,27 @@ contract("FlashApp", (accounts) => {
 
   it("should deposit ether", async () => {
 
-    await flashapp.deposit(web3.utils.toWei("0.001"), {from: wallet, value: web3.utils.toWei("0.001")}).then(async () => {
+    await flashapp.deposit(web3.utils.toWei("0.0001"), {from: wallet, value: web3.utils.toWei("0.0001")}).then(async () => {
 
       const bal = await flashapp.balanceFor.call(wallet);
 
-      return assert.equal(bal, web3.utils.toWei("0.001"), "Deposit failed");
+      return assert.equal(bal, web3.utils.toWei("0.0001"), "Deposit failed");
+
+    });
+
+  });
+
+  it("should withdraw deposited ether from contract", async () => {
+
+    await flashapp.deposit(web3.utils.toWei("0.0001"), { from: wallet, value: web3.utils.toWei("0.0001") }).then(async () => {
+
+      await flashapp.withdraw(web3.utils.toWei("0.0001"), { from: wallet }).then(async () => {
+
+        const bal = await flashapp.balanceFor.call(wallet);
+
+        assert.equal(bal, 0);
+
+      });
 
     });
 
