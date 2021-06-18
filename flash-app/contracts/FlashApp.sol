@@ -17,8 +17,8 @@ contract FlashApp is FlashLoanReceiverBase {
 
   }
 
-  // TODO: Finish the rest of events
   event Deposit(address indexed from, uint256 amount);
+  event Withdrawal(address indexed from, uint256 amount);
   event FlashBang(address indexed from);
 
   // Allows contract to receive ether
@@ -26,6 +26,16 @@ contract FlashApp is FlashLoanReceiverBase {
 
   // Selfdestruct contract and return funds to owner
   function flashBang() public {
+
+    // Make sure the one calling this function is the owner of the contract
+    require(msg.sender == owner, "Only the owner may call this");
+
+    // Send event notifying of destruction
+    emit FlashBang(msg.sender);
+
+    // Terminate contract and send funds to owner
+    selfdestruct(owner);
+
   }
 
   // Allow user to deposit funds to contract
@@ -56,13 +66,18 @@ contract FlashApp is FlashLoanReceiverBase {
     // Update accounts
     accounts[msg.sender] -= amount;
 
-    // TODO: Emit event
-
+    emit Withdrawal(msg.sender, amount);
 
   }
 
+  // Query the current balance of the contract
   function balance() public view returns (uint) {
     return address(this).balance;
+  }
+
+  // Query the current balance of an account
+  function balanceFor(address account) public returns (uint) {
+    return accounts[account];
   }
 
   // Once flash loan is received, this method is excuted
