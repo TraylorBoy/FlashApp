@@ -8,6 +8,17 @@ import DataEntry from "./components/DataEntry";
 import getWeb3 from "./scripts/getWeb3";
 import "./styles/App.css";
 
+// Tasks:
+// - Replace logo.svg with actual logo (generate a .svg from .png)
+// - Configure store
+// - Fix responsiveness for mobile (try wrapping in flex)
+// - Develop and integerate FlashApp API w/ redux-saga
+// - Write and complete w/ all passing - React, Redux, & Redux-Saga Tests
+// - UI/UX Test
+// - Front-end Contract Interaction Test
+// - Go over dapp design guidelines
+// - Correct syntax via style guide
+// - Document w/ docstrings
 class App extends Component {
 
 		constructor(props) {
@@ -88,6 +99,7 @@ class App extends Component {
 						size="medium"
 						handler={this.handleConnect}
 						content="Connect with MetaMask"
+						metamask={true}
 					/>
 
 				</Card>
