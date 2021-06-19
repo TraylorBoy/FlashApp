@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import getWeb3 from "./getWeb3";
-
 import { Flex, Box, Card, Button } from 'rimble-ui';
 import Navbar from './components/Navbar';
-
+import getWeb3 from "./scripts/getWeb3";
 import "./App.css";
 
 class App extends Component {
@@ -12,18 +10,14 @@ class App extends Component {
 			super(props);
 
 			this.state = {
-
 				web3: null,
 				accounts: null,
 				netId: 0,
 				isConnected: false
-
 			}
-
 		}
 
 		componentDidMount = async () => {
-
 			try {
 				// Get network provider and web3 instance.
 				const web3 = await getWeb3();
