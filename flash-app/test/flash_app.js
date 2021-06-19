@@ -1,24 +1,15 @@
 const FlashApp = artifacts.require("FlashApp");
 
-
 contract("FlashApp", (accounts) => {
 
   let flashapp;
   let wallet;
 
-  beforeEach("should setup the flashapp contract instance and test wallet account", async () => {
+  beforeEach("should setup the flashapp contract and test wallet account instances", async () => {
 
     flashapp = await FlashApp.deployed();
 
     wallet = accounts[0];
-
-  });
-
-  it("should retrieve the balance of the contract", async () => {
-
-    const bal = await flashapp.balance();
-
-    assert.equal(bal, 0);
 
   });
 
@@ -32,11 +23,13 @@ contract("FlashApp", (accounts) => {
 
   it("should deposit ether", async () => {
 
-    await flashapp.deposit(web3.utils.toWei("0.0001"), {from: wallet, value: web3.utils.toWei("0.0001")}).then(async () => {
+    const amount = "0.00001"
+
+    await flashapp.deposit(web3.utils.toWei(amount), {from: wallet, value: web3.utils.toWei(amount)}).then(async () => {
 
       const bal = await flashapp.balanceFor.call(wallet);
 
-      return assert.equal(bal, web3.utils.toWei("0.0001"), "Deposit failed");
+      return assert.equal(bal, web3.utils.toWei(amount), "Deposit failed");
 
     });
 
@@ -44,11 +37,13 @@ contract("FlashApp", (accounts) => {
 
   it("should withdraw deposited ether from contract", async () => {
 
-    await flashapp.deposit(web3.utils.toWei("0.0001"), { from: wallet, value: web3.utils.toWei("0.0001") }).then(async () => {
+    const amount = "0.00001";
 
-      await flashapp.withdraw(web3.utils.toWei("0.0001"), { from: wallet }).then(async () => {
+    await flashapp.deposit(web3.utils.toWei(amount), { from: wallet, value: web3.utils.toWei(amount) }).then(async () => {
 
-        const bal = await flashapp.balanceFor.call(wallet);
+      await flashapp.withdraw().then(async () => {
+
+        const bal = await flashapp.balanceFor(wallet);
 
         assert.equal(bal, 0);
 
@@ -58,28 +53,35 @@ contract("FlashApp", (accounts) => {
 
   });
 
-  it("should retrieve the current premium for flashloans", async () => {
+  it("should deposit fee to contract, initiate a flashloan, then withdraw left over funds back to user wallet", async () => {
 
-    const fee = await flashapp.getFee();
+    const token = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"; // Kovan Eth
 
-    const current_fee = 0.09; // Current fee can be located at: https://docs.aave.com/developers/guides/flash-loans
+    const amnt = 0.01;
 
-    return assert.equal(fee.toNumber() / 100, current_fee, "Fee query failed");
+    const fee = 0.09;
 
-  });
+    const owed = web3.utils.toWei((amnt * fee).toString());
 
-  /*it("should initiate a flashloan and emit 2 events: LoanInitiated and LoanCompleted", async () => {
+    await flashapp.deposit(owed, {from: wallet, value: owed}).then(async () => {
 
-    const fee = 0.009;
+      const bal = await flashapp.balanceFor(wallet);
 
-  });*/
+      assert.equal(bal, owed, "Deposit failed");
 
-  it("should selfdestruct contract", async () => {
+    }).then(async () => {
 
-    await flashapp.flashBang().then(async (tx) => {
+      await flashapp.initiateFlashLoan(token, web3.utils.toWei(amnt.toString())).then(async () => {
 
-      return assert.equal(tx.contractAddress, null, "Selfdestruct failed");
+        await flashapp.withdraw().then(async () => {
 
+          const isDone = await flashapp.balanceFor(wallet) == 0 ? true : false;
+
+          return assert.equal(isDone, true, "Flash Loan failed - (Either during withdrawal or flashloan execution)");
+
+        });
+
+      });
     });
 
   });

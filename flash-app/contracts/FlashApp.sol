@@ -1,52 +1,28 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.6.12;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.6.6;
 
 // TASKS:
-// ☐ Finish tests
 // ☐ Document w/ natspec
-// ☐ Optimize & remove unnecessary code
+// ☐ Optimize & remove unnecessary code (ref. Style Guide)
 // ☐ Organize code sections w/ comment headers/dividers
 
 import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from './Interfaces.sol';
 import { FlashLoanReceiverBase } from './FlashLoanReceiverBase.sol';
 
 contract FlashApp is FlashLoanReceiverBase {
-  address payable public owner;
   mapping (address => uint256) private accounts;
 
   // Lending pool address that will provide the loan should be passed on creation
-  constructor(ILendingPoolAddressesProvider provider) FlashLoanReceiverBase(provider) public {
-
-    // Set contract owner
-    owner = payable(msg.sender);
-
-  }
+  constructor(address _addressProvider) FlashLoanReceiverBase(_addressProvider) public {}
 
   event Deposit(address indexed from, uint256 amount);
   event Withdrawal(address indexed from, uint256 amount);
-  event FlashBang(address indexed from);
-  event LoanInitiated(address indexed from, address indexed to, address reserve, uint256 amount, uint256 fee);
-  event LoanCompleted(address reserve, uint256 amount, uint256 fee);
-
-  // Allows contract to receive ether
-  receive() external payable {}
-
-  // Selfdestruct contract and return funds to owner
-  function flashBang() public {
-
-    // Make sure the one calling this function is the owner of the contract
-    require(msg.sender == owner, "Only the owner may call this");
-
-    // Send event notifying of destruction
-    emit FlashBang(msg.sender);
-
-    // Terminate contract and send funds to owner
-    selfdestruct(owner);
-
-  }
+  event LoanInitiated(address indexed from, address reserve, uint256 amount, uint256 fee);
+  event LoanExecuted(address reserve, uint256 amount, uint256 fee);
+  event LoanCompleted(address indexed user, uint256 balance, address reserve, uint256 amount, uint256 fee);
 
   // Allow user to deposit funds to contract
+  // Wraps deposited funds into WETH
   // Used for Flash Loan premium (fee) deposit
   function deposit(uint amount) public payable {
 
@@ -62,35 +38,35 @@ contract FlashApp is FlashLoanReceiverBase {
   }
 
   // Allow user to withdraw funds from contract
-  function withdraw(uint amount) public {
-
-    // Validate amount
-    require(amount > 0, "Amount must be greater than 0");
-    require(accounts[msg.sender] >= amount, "Balance less than amount you are trying to withdraw");
+  function withdraw() public {
 
     // Transfer amount to user
     require(payable(msg.sender).send(accounts[msg.sender]), "Failed to withdraw amount");
 
+    emit Withdrawal(msg.sender, accounts[msg.sender]);
+
     // Update accounts
-    accounts[msg.sender] -= amount;
+    delete accounts[msg.sender];
 
-    emit Withdrawal(msg.sender, amount);
-
-  }
-
-  // Query the current balance of the contract
-  function balance() public view returns (uint) {
-    return address(this).balance;
   }
 
   // Query the current balance of an account
-  function balanceFor(address account) public returns (uint) {
+  function balanceFor(address account) public view returns (uint) {
     return accounts[account];
   }
 
-  // Query the lending pool for the current premium
-  function getFee() public view returns (uint) {
-    return LENDING_POOL.FLASHLOAN_PREMIUM_TOTAL();
+  // Update user account balance after loan is paid back
+  function updateAccount(address account, uint fee) private returns (bool) {
+
+    if (accounts[account] - fee >= 0) {
+      // Subtract the fee from user account
+      accounts[account] -= fee;
+
+      return true;
+    }
+
+    return false;
+
   }
 
   // Once flash loan is received, this method is excuted
@@ -98,47 +74,41 @@ contract FlashApp is FlashLoanReceiverBase {
   // The method currently does nothing with the received loan(s), but emit events on successful
   // loan completion for each of the assets loaned out
   // Loan completion happens when the debt + premium fee is paid back to the lending pool
-  function executeOperation(address[] calldata assets, uint256[] calldata amounts, uint256[] calldata premiums, address, bytes calldata) external override returns (bool operatorionSuccessful) {
+  function executeOperation(address _reserve, uint256 _amount, uint256 _fee, bytes calldata _params) external override {
+
+    // Make sure loan was successful
+    require(_amount <= getBalanceInternal(address(this), _reserve), "Invalid balance, was the flashLoan successful?");
+
+    emit LoanExecuted(_reserve, _amount, _fee);
 
     // Pay debt back to lending pool (amount owed + fee)
-    for (uint i = 0; i < assets.length; i++) {
+    uint totalDebt = _amount + _fee;
+    transferFundsBackToPoolInternal(_reserve, totalDebt);
 
-      uint amountOwed = amounts[i].add(premiums[i]);
-      IERC20(assets[i]).approve(address(LENDING_POOL), amountOwed);
+    ( address account ) = abi.decode(_params, (address));
 
-      // Emit successful flashloan after debt is paid back for each asset
-      emit LoanCompleted(assets[i], amounts[i], premiums[i]);
+    // Update new user balance
+    updateAccount(account, _fee);
 
-    }
-
-    return true;
+    // Emit successful flashloan
+    emit LoanCompleted(account, accounts[account], _reserve, _amount, _fee);
 
   }
 
   // Attempt to retrieve a flashloan for requested amount
   // For this project, there will only be 1 asset selected for each loan operation
-  function initiateFlashLoan(address token, uint256 amount, uint256 mode, address sender, address receiver, uint256 fee) public {
+  function initiateFlashLoan(address token, uint256 amount) public {
 
-    // Make sure user deposited amount to cover fee
-    require(accounts[sender] >= amount * fee);
+    // Validate input
+    require(accounts[msg.sender] > 0, "Please deposit the fee for the loan first");
 
-    address[] memory assets = new address[](1);
-    assets[0] = token;
-
-    uint256[] memory amounts = new uint256[](1);
-    amounts[0] = amount;
-
-    uint256[] memory modes = new uint256[](1);
-    modes[0] = mode;
-
-    bytes memory params = "";
-    uint16 referralCode = 0;
+    bytes memory params = abi.encode(msg.sender);
 
     // Initiate the flashloan with supplied params from client
-    LENDING_POOL.flashLoan(receiver, assets, amounts, modes, sender, params, referralCode);
+    ILendingPool lendingPool = ILendingPool(addressesProvider.getLendingPool());
+    lendingPool.flashLoan(address(this), token, amount, params);
 
-    // Notify that a flashloan has been initiated
-    emit LoanInitiated(sender, receiver, token, amount, fee);
+    emit LoanInitiated(msg.sender, token, amount, accounts[msg.sender]);
 
   }
 
