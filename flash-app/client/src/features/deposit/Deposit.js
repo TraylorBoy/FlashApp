@@ -20,14 +20,15 @@ function Deposit() {
     setFee((amnt * premium).toFixed(5));
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     if (user.connection.success && loanAmount >= 0.01) {
       // Format
-      let owed = parseFloat(loanAmount).toFixed(18);
+      let _fee = parseFloat(loanAmount).toFixed(18);
+      let _loanAmount = parseFloat(loanAmount).toFixed(18);
 
-      dispatch(setAmount(owed));
+      dispatch(setAmount({_fee, _loanAmount}));
       setLock(true);
-      e.preventDefault();
+
     } else {
       // TODO - Remove alert and make component
       alert("Please enter a Loan Amount greater than or equal to 0.01");
