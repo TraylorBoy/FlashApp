@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import { Flex, Box, Card, Text, Heading, Link, Input, Field } from "rimble-ui";
+import { Flex, Box, Card, Text, Heading, Input, Field } from "rimble-ui";
+import User from "../features/user/User";
 import CustomButton from "./CustomButton";
 
 function Panels(props) {
@@ -15,15 +16,7 @@ function Panels(props) {
           <Text.p textAlign="left">
           &emsp;Connect with your MetaMask wallet in order to use the application and start your FlashLoan by clicking the button below.
           </Text.p>
-          <Box>
-            <CustomButton
-              color="black"
-              size="small"
-              handler={props.handleConnect}
-              content="Connect with MetaMask"
-              metamask={true}
-            />
-          </Box>
+          <User />
         </Card>
       </Box>
       <Box p={4} width={1/3}>

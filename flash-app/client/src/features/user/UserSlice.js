@@ -1,21 +1,46 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { connect } from "../../scripts/connect";
+
+export const getWallet = createAsyncThunk("user/getWallet", async () => {
+  const wallet = await connect();
+  return wallet;
+});
 
 export const UserSlice = createSlice({
   name: "user",
   initialState: {
-    address: "",
-    balance: 0,
-    isConnected: false
+    wallet: {
+      address: "",
+      balance: 0,
+      netID: 0
+    },
+    connection: {
+      status: "",
+      error: "",
+      success: false
+    }
   },
   reducers: {
-    connect = (state, action) => {
-      state.isConnected = action.payload.connected;
-      state.address = action.payload.address;
-      state.balance = action.payload.balance;
+    attemptConnect: (state) => {
+      state.connection.status = "request_pending";
+    }
+  },
+  extraReducers: {
+    [getWallet.pending]: state => {
+      state.connection.status = "request_sent";
+    },
+    [getWallet.fulfilled]:  (state, action) => {
+      state.connection.status = "request_fulfilled";
+      state.connection.success = true;
+      state.wallet = action.payload;
+    },
+    [getWallet.rejected]: (state, action) => {
+      state.connection.status = "request_fail";
+      state.connection.error = action.error.message;
     }
   }
 });
 
-export default {
-  connect
-} = UserSlice.actions;
+export const { attemptConnect } = UserSlice.actions;
+
+export default UserSlice.reducer;

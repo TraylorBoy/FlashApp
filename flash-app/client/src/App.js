@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import { Card } from "rimble-ui";
+import { Card, Flex, Box } from "rimble-ui";
 import Navbar from "./components/Navbar";
 import Instructions from "./components/Instructions";
 import Panels from "./components/Panels";
-import getWeb3 from "./scripts/getWeb3";
 import "./styles/App.css";
 
 // Tasks:
@@ -21,54 +20,6 @@ class App extends Component {
 
 		constructor(props) {
 			super(props);
-
-			this.state = {
-				web3: null,
-				accounts: null,
-				netId: 0,
-				isConnected: false
-			}
-		}
-
-		componentDidMount = async () => {
-			try {
-				// Get network provider and web3 instance.
-				const web3 = await getWeb3();
-				this.setState({ web3 });
-
-			} catch (error) {
-				// Catch any errors for any of the above operations.
-				console.log(
-					`Failed to load web3. Check console for details.`,
-				);
-				console.error(error);
-			}
-		}
-
-		handleConnect = async () => {
-
-			try {
-
-				console.log("Connecting...");
-
-				// Get the user"s accounts.
-				const accounts = await this.state.web3.eth.getAccounts();
-
-				// Get the user"s network id.
-				const netId = await this.state.web3.eth.net.getId();
-
-				this.setState({ accounts, netId });
-
-				console.log("Successfully connected");
-
-			} catch (error) {
-				// Catch any errors for any of the above operations.
-				console.log(
-					`Failed to load accounts, or network id. Check console for details.`,
-				);
-				console.error(error);
-			}
-
 		}
 
 		handleStart = async (e) => {
@@ -79,23 +30,27 @@ class App extends Component {
 	render() {
 		return (
 			<div className="App">
-				<Card>
+				<Flex>
+					<Box>
+						<Card>
 
-					<Navbar
-						header="FlashApp"
-						premium="0.09"
-						token="Kovan Ethereum (KETH)"
-						tokenAddress="0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
-					 />
+							<Navbar
+								header="FlashApp"
+								premium="0.09"
+								token="Kovan Ethereum (KETH)"
+								tokenAddress="0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+							 />
 
-					<Instructions />
+							<Instructions />
 
-					<Panels
-						connectHandle={this.handleConnect}
-						startHandle={this.handleStart}
-					/>
+							<Panels
+								connectHandle={this.handleConnect}
+								startHandle={this.handleStart}
+							/>
 
-				</Card>
+						</Card>
+					</Box>
+				</Flex>
 			</div>
 		);
 	}
