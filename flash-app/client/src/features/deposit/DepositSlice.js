@@ -9,7 +9,9 @@ export const DepositSlice = createSlice({
   reducers: {
     setPremium: (state, action) => {state.premium = action.payload},
     setAmount: (state, action) => {
-      if (action.payload > 0) state.amount = action.payload;
+      if (action.payload > 0) {
+        state.amount = action.payload;
+      }
     }
   }
 });

@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import { Flex, Box, Card, Text, Heading, Input, Field } from "rimble-ui";
-import User from "../features/user/User";
+import { Flex, Box, Card, Text, Heading } from "rimble-ui";
 import CustomButton from "./CustomButton";
+import StepOne from "./StepOne";
+import StepTwo from "./StepTwo";
 
 function Panels(props) {
   let [fee, setFee] = useState(0);
@@ -10,39 +11,10 @@ function Panels(props) {
   return (
     <Flex>
       <Box p={4} width={1/3}>
-        <Card>
-          <Text.span>Step 1</Text.span>
-          <Heading as="h2">Connect</Heading>
-          <Text.p textAlign="left">
-          &emsp;Connect with your MetaMask wallet in order to use the application and start your FlashLoan by clicking the button below.
-          </Text.p>
-          <User />
-        </Card>
+        <StepOne />
       </Box>
       <Box p={4} width={1/3}>
-        <Card>
-          <Text.span>Step 2</Text.span>
-          <Heading as="h2">Loan Amount</Heading>
-          <Text.p>
-            Enter the amount of KETH you would like to borrow in the field below. Then proceed to Step 3 to start the operation!
-          </Text.p>
-          <Box>
-            <Field label={"Amount of KETH to borrow"}>
-              <Input
-                type="number"
-                onChange={(e) => setFee(fee = e.target.value * 0.09)}
-                height="2rem"
-                color="white"
-                bg="black"
-                placeholder="e.g. 0.1"
-                required
-              />
-            </Field>
-          </Box>
-          <Box>
-            <Text.span textAlign="left">Amount Owed: { fee } KETH</Text.span>
-          </Box>
-        </Card>
+        <StepTwo />
       </Box>
       <Box p={4} width={1/3}>
         <Card>

@@ -6,10 +6,10 @@ export const connect = async () => {
     const accounts = await web3.eth.getAccounts();
 
     const address = accounts[0];
-    const netId = await web3.eth.net.getId();
+    const netID = await web3.eth.net.getId();
     const balance = await web3.eth.getBalance(address);
 
-    return {netId, address, balance};
+    return {netID, address, balance};
   } catch (err) {
     console.log(
       "Failed connecting to MetaMask",

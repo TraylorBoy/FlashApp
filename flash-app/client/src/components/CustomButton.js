@@ -1,9 +1,9 @@
 import React from "react";
-import { MetaMaskButton, Button, Box } from "rimble-ui";
+import { MetaMaskButton, Button, Box, Flex } from "rimble-ui";
 
 function CustomButton(props) {
   return(
-    <Box p={3}>
+    <div>
       {props.metamask
         ? <MetaMaskButton
           mainColor={props.color}
@@ -23,7 +23,7 @@ function CustomButton(props) {
           {props.content}
           </Button>
         }
-    </Box>
+    </div>
   );
 }
 

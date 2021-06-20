@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { attemptConnect, getWallet } from "./UserSlice";
 import { Flex, Box } from "rimble-ui";
 import CustomButton from "../../components/CustomButton";
+import NetworkIndicator from "../../components/NetworkIndicator";
 
 function User() {
   const dispatch = useDispatch();
-  const connection = useSelector(state => state.user.connection);
+
+  let connection = useSelector(state => state.user.connection);
 
   let [flag, setFlag] = useState(0);
 
@@ -18,21 +20,30 @@ function User() {
   useEffect(() => {
     if (connection.status === "request_pending") {
       dispatch(getWallet()); // create wallet
+    }
+
+    return function cleanup() {
       setFlag(0); // reset state
     }
   }, [connection, dispatch]);
 
   return (
-    <Flex>
-      <Box>
-        <CustomButton
-          color="black"
-          size="small"
-          handler={() => setFlag(1)}
-          content="Connect with MetaMask"
-          metamask={true}
-        />
-      </Box>
+    <Flex flexDirection="column">
+      {connection.success ?
+        <Box p={4}>
+          <NetworkIndicator />
+        </Box>
+        :
+        <Box p={4}>
+          <CustomButton
+            color="black"
+            size="small"
+            handler={() => setFlag(1)}
+            content="Connect with MetaMask"
+            metamask={true}
+          />
+        </Box>
+      }
     </Flex>
   );
 }
