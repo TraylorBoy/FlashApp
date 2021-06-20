@@ -1,87 +1,56 @@
 import React, { Component } from "react";
-import getWeb3 from "./getWeb3";
+import { Card, Flex, Box } from "rimble-ui";
+import Navbar from "./components/Navbar";
+import Instructions from "./components/Instructions";
+import Panels from "./components/Panels";
+import "./styles/App.css";
 
-import { Flex, Box, Card, Button } from 'rimble-ui';
-import Navbar from './components/Navbar';
-
-import "./App.css";
-
+// Tasks:
+// - Replace logo.svg with actual logo (generate a .svg from .png)
+// - Configure store
+// - Fix responsiveness for mobile (try wrapping in flex)
+// - Develop and integerate FlashApp API w/ redux-saga
+// - Write and complete w/ all passing - React, Redux, & Redux-Saga Tests
+// - UI/UX Test
+// - Front-end Contract Interaction Test
+// - Go over dapp design guidelines
+// - Correct syntax via style guide
+// - Document w/ docstrings
 class App extends Component {
 
 		constructor(props) {
 			super(props);
-
-			this.state = {
-
-				web3: null,
-				accounts: null,
-				netId: 0,
-				isConnected: false
-
-			}
-
 		}
 
-		componentDidMount = async () => {
-
-			try {
-				// Get network provider and web3 instance.
-				const web3 = await getWeb3();
-				this.setState({ web3 });
-
-			} catch (error) {
-				// Catch any errors for any of the above operations.
-				console.log(
-					`Failed to load web3. Check console for details.`,
-				);
-				console.error(error);
-			}
-		}
-
-		handleConnect = async () => {
-
-			try {
-
-				console.log('Connecting...');
-
-				// Get the user's accounts.
-				const accounts = await this.state.web3.eth.getAccounts();
-
-				// Get the user's network id.
-				const netId = await this.state.web3.eth.net.getId();
-
-				this.setState({ accounts, netId });
-
-				console.log('Successfully connected');
-
-			} catch (error) {
-				// Catch any errors for any of the above operations.
-				console.log(
-					`Failed to load accounts, or network id. Check console for details.`,
-				);
-				console.error(error);
-			}
-
+		handleStart = async (e) => {
+			alert("This does nothing yet");
+			e.preventDefault();
 		}
 
 	render() {
 		return (
 			<div className="App">
+				<Flex>
+					<Box>
+						<Card>
 
-				<Card>
+							<Navbar
+								header="FlashApp"
+								premium="0.09"
+								token="Kovan Ethereum (KETH)"
+								tokenAddress="0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+							 />
 
-					<Navbar />
+							<Instructions />
 
-					<Box p={3}>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultrices nibh nec fermentum bibendum. Nullam venenatis pellentesque nibh, vel ultrices dui consequat nec. Integer lectus massa, lacinia vitae odio at, porttitor mollis massa. Curabitur viverra eget magna vitae viverra. Cras leo tortor, sagittis ac massa non, aliquet imperdiet dui. Etiam rutrum eleifend orci ac iaculis. Fusce lacinia lobortis quam, quis semper libero cursus tincidunt. Nullam consequat, nisl vitae rutrum malesuada, lacus eros ornare lacus, nec fermentum orci nisl at mauris. Quisque in diam eu leo molestie pellentesque. Ut urna ex, mattis a dictum vitae, maximus nec purus. Integer finibus nulla odio, ut faucibus nibh ultrices et. Donec mattis odio metus, eget dictum nulla venenatis vitae. Aenean suscipit nisl diam, ac pharetra quam lobortis vitae. Aliquam id ex sit amet metus pulvinar molestie a vel erat. Suspendisse luctus turpis id sapien finibus rhoncus.</p>
+							<Panels
+								connectHandle={this.handleConnect}
+								startHandle={this.handleStart}
+							/>
+
+						</Card>
 					</Box>
-
-					<Box p={3}>
-						<Button mainColor="black" size="small" onClick={this.handleConnect}>Connect Wallet</Button>
-					</Box>
-
-				</Card>
-
+				</Flex>
 			</div>
 		);
 	}
