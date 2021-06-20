@@ -7,7 +7,7 @@ export const connect = async () => {
 
     const address = accounts[0];
     const netID = await web3.eth.net.getId();
-    const balance = await web3.eth.getBalance(address);
+    const balance = web3.utils.fromWei(await web3.eth.getBalance(address));
 
     return {netID, address, balance};
   } catch (err) {

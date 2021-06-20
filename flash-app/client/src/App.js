@@ -7,8 +7,6 @@ import "./styles/App.css";
 
 // Tasks:
 // - Replace logo.svg with actual logo (generate a .svg from .png)
-// - Configure store
-// - Fix responsiveness for mobile (try wrapping in flex)
 // - Develop and integerate FlashApp API w/ redux-saga
 // - Write and complete w/ all passing - React, Redux, & Redux-Saga Tests
 // - UI/UX Test
@@ -16,6 +14,10 @@ import "./styles/App.css";
 // - Go over dapp design guidelines
 // - Correct syntax via style guide
 // - Document w/ docstrings
+// - Run through tests & debug 1 last time
+// - Build for production
+// - Complete readme
+// - Turn in project
 class App extends Component {
 
 		constructor(props) {
