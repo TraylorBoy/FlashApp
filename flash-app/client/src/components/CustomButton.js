@@ -9,6 +9,7 @@ function CustomButton(props) {
           mainColor={props.color}
           size={props.size}
           onClick={props.handler}
+          disabled={props.disabled}
           >
           {props.content}
         </MetaMaskButton>
@@ -17,6 +18,7 @@ function CustomButton(props) {
           mainColor={props.color}
           size={props.size}
           onClick={props.handler}
+          disabled={props.disabled}
           >
           {props.content}
           </Button>

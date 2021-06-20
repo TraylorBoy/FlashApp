@@ -1,7 +1,7 @@
 // Navigation bar at the top of the application
 // Displays title
 import React from 'react';
-import { Flex, Box, Heading, EthAddress } from 'rimble-ui';
+import { Flex, Box, Heading, Text } from 'rimble-ui';
 
 function Navbar(props) {
 
@@ -13,10 +13,10 @@ function Navbar(props) {
 
       <Flex borderBottom="1px solid">
       <Box p={3} width={1/2}>
-        <p>Reserve Token: <b>{props.token}</b></p>
+        <Text.span>Reserve Token: <b>{props.token}</b></Text.span>
       </Box>
         <Box p={3} width={1/2}>
-          <p>Deposit Premium: <b>{props.premium}%</b></p>
+          <Text.span>Deposit Premium: <b>{props.premium}%</b></Text.span>
         </Box>
       </Flex>
     </div>

@@ -1,10 +1,8 @@
 import React, { Component } from "react";
-import { Flex, Box, Card } from "rimble-ui";
+import { Card } from "rimble-ui";
 import Navbar from "./components/Navbar";
-import Placeholder from "./components/Placeholder";
-import CustomButton from "./components/CustomButton";
+import Instructions from "./components/Instructions";
 import Panels from "./components/Panels";
-import DataEntry from "./components/DataEntry";
 import getWeb3 from "./scripts/getWeb3";
 import "./styles/App.css";
 
@@ -73,7 +71,7 @@ class App extends Component {
 
 		}
 
-		handleData = async (e) => {
+		handleStart = async (e) => {
 			alert("This does nothing yet");
 			e.preventDefault();
 		}
@@ -86,20 +84,15 @@ class App extends Component {
 					<Navbar
 						header="FlashApp"
 						premium="0.09"
-						token="Kovan Test-Net Ethereum (KETH)"
+						token="Kovan Ethereum (KETH)"
 						tokenAddress="0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
 					 />
 
-					<Panels />
+					<Instructions />
 
-					<DataEntry collectData={this.handleData} />
-
-					<CustomButton
-						color="black"
-						size="medium"
-						handler={this.handleConnect}
-						content="Connect with MetaMask"
-						metamask={true}
+					<Panels
+						connectHandle={this.handleConnect}
+						startHandle={this.handleStart}
 					/>
 
 				</Card>
