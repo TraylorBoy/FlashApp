@@ -1,4 +1,5 @@
 require('dotenv').config();
+const assert = require('assert');
 const client = require('../clientAPI');
 
 const TEST_CONFIG = {
@@ -8,17 +9,10 @@ const TEST_CONFIG = {
   TOKEN: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 };
 
-test('sends a get request to test server communication', async () => {
-  let res = await client.testRequest();
-  expect.assertions(res);
-
-  const data = res.data;
-
-  return expect(data.message).toBe('success');
+describe('testRequest', () => {
+  it('should send a GET request to `localhost:3000/` and receive a success message', async () => {
+    await client._testRequest().then(({data}) => {
+      assert.equal(data, 'success');
+    });
+  });
 });
-
-/*test('requests server to setup flashloan via interacting with the FlashApp conract on the Kovan Ethereum test network with settings supplied by user', async () => {
-  let res = await client.setupLoan(TEST_CONFIG);
-
-  return expect(res).toBe('success');
-});*/

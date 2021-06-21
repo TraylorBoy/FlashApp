@@ -7,18 +7,21 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-const testRequest = async () => {
+const _testRequest = () => {
   const uri = '/';
 
-  console.log('Sending GET request to server at: ', axios.default.baseURL + uri);
+  console.log('Sending GET request to server at: ', url + uri);
 
-  let resp = await axios.get(url + uri, headers);
-  
-  if (resp) {
-    console.log('Received response from server: ', resp);
-
-    return resp;
-  }
+    return new Promise(async (resolve, reject) => {
+      try {
+        const res = await axios.get(url + uri, headers);
+        resolve(res);
+      } catch (err) {
+        console.log('An error occurred while trying to test the server communication. Please check the console for more information.');
+        console.log(err);
+        reject('unsuccessful');
+      }
+    });
 };
 
 const setupLoan = async (config) => {
@@ -40,6 +43,6 @@ const setupLoan = async (config) => {
 };
 
 module.exports = {
-  testRequest,
+  _testRequest,
   setupLoan
 };

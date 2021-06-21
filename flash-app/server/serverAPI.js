@@ -9,11 +9,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/', async (req, res) => {
-  return res.send({
-    status: 'success',
-    message: '',
-    data: null
-  });
+  return res.send("success");
 });
 
 app.post('/setupFlashLoan', async (req, res) => {
@@ -34,7 +30,7 @@ app.post('/setupFlashLoan', async (req, res) => {
       data: null
     });
   } catch (err) {
-    console.log('An error occurred while trying to setup the FLash Loan. Please check the console!');
+    console.log('An error occurred while trying to setup the Flash Loan. Please check the console!');
     console.log(err);
 
     return res.send({
