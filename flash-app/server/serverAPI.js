@@ -1,6 +1,6 @@
 // TODO: Response errors
 require('dotenv').config();
-const Wallet = require('./wallet.js');
+const Wallet = require('./core/wallet.js');
 const express = require('express'),
   app = express(),
   port = process.env.PORT || 3000;
