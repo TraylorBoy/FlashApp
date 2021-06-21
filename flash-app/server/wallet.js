@@ -2,7 +2,7 @@
 // - Setup script intended to be used with the FlashApp API (flashappi)
 // author: Marques Traylor
 const Web3 = require('web3');
-const BN = require('bn');
+const BN = require('bn.js');
 
 let props = {
   _web3: null,
@@ -11,8 +11,8 @@ let props = {
   flash_config: {}
 };
 
-// Setup method
-const Wallet = async (config, provider, port) => {
+// Setup wallet instance
+const setup = async (config, provider, port) => {
   // Unpack LOAN_SETTINGS sent from client
   props._web3 = new Web3(provider | 'ws://localhost:' + port);
   props.address = config.ADDRESS;
@@ -25,8 +25,10 @@ const Wallet = async (config, provider, port) => {
   return props;
 };
 
-export default async (config, provider=null, port=3000) => {
-  const wallet = await Wallet(config, provider, port);
+const Wallet = async (config, provider=null, port=3000) => {
+  const wallet = await setup(config, provider, port);
 
   return wallet;
 };
+
+module.exports = Wallet;

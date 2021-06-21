@@ -2,10 +2,10 @@
   "name": "flashappi",
   "version": "1.0.0",
   "description": "API for interacting with FlashApp contract on the Ethereum Test-Network, Kovan.",
-  "main": "client.js",
+  "main": "serverAPI.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon serverAPI.js"
   },
   "repository": {
     "type": "git",

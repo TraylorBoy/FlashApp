@@ -1,6 +1,6 @@
 // TODO: Response errors
-require('dotenv').config(); // Access environment variables
-const Wallet = require('./scripts/Wallet.js');
+require('dotenv').config();
+const Wallet = require('./wallet.js');
 const express = require('express'),
   app = express(),
   port = process.env.PORT || 3000;

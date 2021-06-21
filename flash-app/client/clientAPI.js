@@ -1,4 +1,4 @@
-require('dotenv').config(); // Access environment variables
+require('dotenv').config();
 const axios = require('axios');
 
 const url = process.env.URL || 'localhost:'
@@ -24,6 +24,6 @@ const setupLoan = async (config) => {
   }
 };
 
-export default {
+module.exports = {
   setupLoan
 };
