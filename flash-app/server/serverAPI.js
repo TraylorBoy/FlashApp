@@ -2,6 +2,7 @@
 require('dotenv').config();
 const Wallet = require('./core/wallet.js');
 const FlashApp = require('./core/contract.js');
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 const express = require('express'),
   app = express(),
   port = process.env.PORT || 3000;
@@ -12,7 +13,14 @@ app.use(express.urlencoded({ extended: true }));
 let STATE = {
   _wallet: null,
   _contract: null,
-  _contractAddress: process.env.CONTRACT_ADDR
+  _contractAddress: process.env.CONTRACT_ADDR,
+  _provider: new HDWalletProvider({
+    privateKeys: [process.env.WALLET_KEY],
+    providerOrUrl: process.env.KOVAN_URL,
+    numberOfAddresses: 1,
+    shareNonce: true,
+    derivationPath: "m/44'/1'/0'/0/"
+  })
 }
 
 app.get('/', async (_, res) => {
