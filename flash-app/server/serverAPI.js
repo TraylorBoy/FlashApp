@@ -68,14 +68,16 @@ app.post('/startLoan', async (req, res) => {
   console.log('POST Request: startLoan');
 
   try {
-    const web3 = wallet._web3;
+    if (!req.body) throw new Error('Please send over a signed transaction.');
     const signedTx = req.body;
 
     await web3.eth.sendSignedTransaction(signedTx.rawTransaction).then(async (receipt) => {
-      console.log('FlashLoan completed, receipt: ', receipt);
+      console.log('Transaction completed, receipt: ', receipt);
 
-    })
-
+      return res.send({
+        message: 'success',
+        payload: receipt`
+    });
   } catch (err) {
     console.log('An error occurred while trying to setup the Flash Loan. Please check the console!');
     console.log(err);
