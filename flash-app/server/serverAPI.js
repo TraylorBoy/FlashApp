@@ -16,28 +16,27 @@ app.post('/setupFlashLoan', async (req, res) => {
   console.log('Request: setupFlashLoan');
 
   try {
-    const CONFIG = await req.body.json();
+    const CONFIG = req.body;
+
+    if (!CONFIG) throw new Error('Invalid configuration: ', CONFIG);
 
     console.log('Received FlashLoan configuration: ', CONFIG);
     console.log('Setting up FlashLoan...');
 
-    wallet = await Wallet(CONFIG);
-    console.log('Wallet created: ', wallet);
+    await Wallet(CONFIG).then(wallet => {
+      console.log('Wallet created at address: ', wallet.address);
 
-    return res.send({
-      status: 'success',
-      message: '',
-      data: null
+      // TODO: Deposit premium to contract
+
+
+      // TODO: Send Deposit TX with success message
+      return res.send('success');
     });
   } catch (err) {
     console.log('An error occurred while trying to setup the Flash Loan. Please check the console!');
     console.log(err);
 
-    return res.send({
-      status: 'error',
-      message: err.message,
-      data: null
-    });
+    return res.send(err);
   }
 
 });

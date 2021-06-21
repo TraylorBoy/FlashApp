@@ -16,3 +16,11 @@ describe('testRequest', () => {
     });
   });
 });
+
+describe('setupLoan', () => {
+  it('should send the TEST_CONFIG to the server and receive a success message', async () => {
+    await client.setupLoan(TEST_CONFIG).then(({ data }) => {
+      assert.equal(data, 'success');
+    });
+  });
+});

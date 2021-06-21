@@ -13,10 +13,11 @@ let props = {
 
 // Setup wallet instance
 const setup = async (config, provider, port) => {
+  console.log('Unpacking config');
   // Unpack LOAN_SETTINGS sent from client
   props._web3 = new Web3(provider | 'ws://localhost:' + port);
-  props.address = config.ADDRESS;
-  props.funds = new BN(config.BALANCE);
+  props.address = config.WALLET.address;
+  props.funds = new BN(config.WALLET.balance);
 
   props.flash_config.reserve = config.TOKEN;
   props.flash_config.amount = new BN(config.LOAN_AMOUNT);
@@ -25,10 +26,8 @@ const setup = async (config, provider, port) => {
   return props;
 };
 
-const Wallet = async (config, provider=null, port=3000) => {
+module.exports = Wallet = async (config, provider=null, port=3000) => {
   const wallet = await setup(config, provider, port);
 
   return wallet;
 };
-
-module.exports = Wallet;
