@@ -1,0 +1,31 @@
+{
+  "name": "flashappi",
+  "version": "1.0.0",
+  "description": "API for interacting with FlashApp contract on the Ethereum Test-Network, Kovan.",
+  "main": "serverAPI.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon serverAPI.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TraylorBoy/FlashApp.git"
+  },
+  "keywords": [
+    "FlashApp"
+  ],
+  "author": "Marques Traylor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TraylorBoy/FlashApp/issues"
+  },
+  "homepage": "https://github.com/TraylorBoy/FlashApp#readme",
+  "devDependencies": {
+    "dotenv": "^10.0.0",
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "web3": "^1.3.6"
+  }
+}

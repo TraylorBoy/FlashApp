@@ -1,4 +1,4 @@
-require("dotenv").config(); // Access environment variables
+require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 const path = require("path");
 

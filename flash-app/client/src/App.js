@@ -20,10 +20,6 @@ import "./styles/App.css";
 // - Turn in project
 class App extends Component {
 
-		constructor(props) {
-			super(props);
-		}
-
 		handleStart = async (e) => {
 			alert("This does nothing yet");
 			e.preventDefault();

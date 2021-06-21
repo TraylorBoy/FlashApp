@@ -34,12 +34,12 @@ function User() {
           <NetworkIndicator />
         </Box>
         :
-        <Box p={4}>
+        <Box>
           <CustomButton
             color="black"
             size="small"
             handler={() => setFlag(1)}
-            content="Connect with MetaMask"
+            content="Connect Wallet"
             metamask={true}
           />
         </Box>

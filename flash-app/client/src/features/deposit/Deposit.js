@@ -37,6 +37,19 @@ function Deposit() {
 
   return (
     <div>
+      <Field label={"Amount of KETH to borrow"}>
+        <Input
+          type="number"
+          onChange={handleChange}
+          value={loanAmount}
+          color="white"
+          bg="black"
+          placeholder="e.g. 0.1"
+          fontSize="0.75rem"
+          mr=""
+          required
+        />
+      </Field>
       <Flex flexDirection="column">
         <Box p={4}>
           <Text.span textAlign="left">
@@ -44,28 +57,10 @@ function Deposit() {
           </Text.span>
         </Box>
         <Box>
-          <Field label={"Amount of KETH to borrow"}>
-            <Input
-              type="number"
-              onChange={handleChange}
-              value={loanAmount}
-              height="2rem"
-              color="white"
-              bg="black"
-              placeholder="e.g. 0.1"
-              required
-            />
-          </Field>
-        </Box>
-        <Box>
           {
             lock ?
-            <Flex>
-              <Box width={1/2}>
-                <Text mr={2}>Loan Amount set!</Text>
-                <Icon name="CheckCircle" color="success" />
-              </Box>
-              <Box width={1/2}>
+            <Flex flexDirection="column">
+              <Box>
                 <Button
                   mainColor="black"
                   size="small"
@@ -73,6 +68,9 @@ function Deposit() {
                 >
                   Change Amount
                 </Button>
+              </Box>
+              <Box p={3}>
+                <Icon name="CheckCircle" color="success" />
               </Box>
             </Flex>
             :

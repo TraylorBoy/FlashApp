@@ -9056,7 +9056,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-06-21T16:19:46.743Z",
+  "updatedAt": "2021-06-19T16:54:52.750Z",
   "devdoc": {
     "author": "Marques Traylor",
     "details": "User deposits fee, contract performs flash loan, left over balance automatically withdrawn from contract and sent back to user",

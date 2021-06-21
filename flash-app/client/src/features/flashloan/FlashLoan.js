@@ -41,11 +41,11 @@ function FlashLoan() {
       if (flag === 91) {}
 
     }
-  });
+  }, [depositAmount, flag, locked, lock]);
 
   const handleStart = () => {
     // Make sure user has enough funds to cover premium
-    if (wallet.balance > depositAmount) {
+    if (parseFloat(wallet.balance) > parseFloat(depositAmount)) {
       setLock(0); // Lock state
       setFlag(91); // Setup middleware
 
