@@ -1,3 +1,6 @@
+// Web3 MetaMask Wallet Connection Wrapper
+// - Retrieves the Network ID, Address, and Balance of a MetaMask wallet
+// author: Marques Traylor
 import getWeb3 from "./getWeb3";
 
 export const connect = async () => {
@@ -12,7 +15,7 @@ export const connect = async () => {
     return {netID, address, balance};
   } catch (err) {
     console.log(
-      "Failed connecting to MetaMask",
+      "Failed retrieving MetaMask wallet data",
     );
     console.error(err);
   }
