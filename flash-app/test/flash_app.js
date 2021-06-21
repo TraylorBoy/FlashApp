@@ -25,7 +25,7 @@ contract("FlashApp", (accounts) => {
 
     const amount = "0.00001"
 
-    await flashapp.deposit(web3.utils.toWei(amount), {from: wallet, value: web3.utils.toWei(amount)}).then(async () => {
+    await flashapp.deposit({from: wallet, value: web3.utils.toWei(amount)}).then(async () => {
 
       const bal = await flashapp.balanceFor.call(wallet);
 
@@ -39,7 +39,7 @@ contract("FlashApp", (accounts) => {
 
     const amount = "0.00001";
 
-    await flashapp.deposit(web3.utils.toWei(amount), { from: wallet, value: web3.utils.toWei(amount) }).then(async () => {
+    await flashapp.deposit({ from: wallet, value: web3.utils.toWei(amount) }).then(async () => {
 
       await flashapp.withdraw().then(async () => {
 
@@ -63,7 +63,7 @@ contract("FlashApp", (accounts) => {
 
     const owed = web3.utils.toWei((amnt * fee).toString());
 
-    await flashapp.deposit(owed, {from: wallet, value: owed}).then(async () => {
+    await flashapp.deposit({from: wallet, value: owed}).then(async () => {
 
       const bal = await flashapp.balanceFor(wallet);
 

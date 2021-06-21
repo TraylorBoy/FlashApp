@@ -11,7 +11,7 @@ let props = {
 };
 
 // Setup wallet instance
-const setup = async (config, provider, port) => {
+const setup = async (config, provider) => {
   console.log('Unpacking config');
   // Unpack LOAN_SETTINGS sent from client
   props._web3 = new Web3(new Web3.providers.HttpProvider(provider));
@@ -26,8 +26,8 @@ const setup = async (config, provider, port) => {
   return props;
 };
 
-module.exports = Wallet = async (config, provider, port=3000) => {
-  const wallet = await setup(config, provider, port);
+module.exports = Wallet = async (config, provider) => {
+  const wallet = await setup(config, provider);
 
   return wallet;
 };

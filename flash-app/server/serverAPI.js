@@ -2,7 +2,7 @@
 require('dotenv').config();
 const Wallet = require('./core/wallet.js');
 const FlashApp = require('./core/contract.js');
-const HDWalletProvider = require("@truffle/hdwallet-provider");
+const Web3 = require('web3');
 const express = require('express'),
   app = express(),
   port = process.env.PORT || 3000;
@@ -39,13 +39,16 @@ app.post('/setupFlashLoan', async (req, res) => {
         console.log('FlashApp contract instance created at address: ', flashApp.options.address);
 
         const owing = web3.utils.toWei(wallet.flash_config.fee.toString());
+        const txCount = await web3.eth.getTransactionCount(wallet.address);
+
         const tx = {
+          nonce: txCount,
           to: flashApp.options.address,
           from: wallet.address,
           value: owing,
           data: flashApp.methods.deposit(owing).encodeABI(),
-          gas: 5000000
-        }
+          gas: 6000000
+        };
 
         console.log('Sending over transaction to client for it to be signed: ', tx);
 
@@ -70,13 +73,15 @@ app.post('/startLoan', async (req, res) => {
   try {
     if (!req.body) throw new Error('Please send over a signed transaction.');
     const signedTx = req.body;
+    const web3 = new Web3(new Web3.providers.HttpProvider(PROVIDER));
 
     await web3.eth.sendSignedTransaction(signedTx.rawTransaction).then(async (receipt) => {
       console.log('Transaction completed, receipt: ', receipt);
 
       return res.send({
         message: 'success',
-        payload: receipt`
+        payload: receipt
+      });
     });
   } catch (err) {
     console.log('An error occurred while trying to setup the Flash Loan. Please check the console!');

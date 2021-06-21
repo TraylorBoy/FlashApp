@@ -11,7 +11,7 @@ const _testRequest = () => {
 
     return new Promise(async (resolve, reject) => {
       try {
-        const res = await axios.get(url + uri, headers);
+        const res = await axios.get(url + uri);
         resolve(res);
       } catch (err) {
         console.log('An error occurred while trying to test the server communication. Please check the console for more information.');

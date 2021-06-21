@@ -23,7 +23,6 @@ contract FlashApp is FlashLoanReceiverBase {
     }
 
 	/// Emits when a user deposits the premium associated with the FlashLoan
-	/// @notice Will not emit if deposit fails (i.e. user balance < amount or msg.value != amount)
 	/// @param from User address that is depositing the premium
 	/// @param amount Amount that user is depositing
 	event Deposit(address indexed from, uint256 amount);
@@ -142,15 +141,11 @@ contract FlashApp is FlashLoanReceiverBase {
 
 	/// @notice Used for Flash Loan premium (fee) deposit
 	/// @dev Must deposit first before calling initiateFlashLoan
-	/// @param amount Amount that user is depositing
-	function deposit(uint amount) public payable {
-		require(amount > 0, "Amount less than 0");
-		require(amount == msg.value, "Amount is not the same as value sent");
-
+	function deposit() public payable {
 		// Update accounts with new amount deposited
-		accounts[msg.sender] = amount;
+		accounts[msg.sender] = msg.value;
 
-		emit Deposit(msg.sender, amount);
+		emit Deposit(msg.sender, msg.value);
 	}
 
 	/// @notice User funds will be less after FlashLoan is completed
