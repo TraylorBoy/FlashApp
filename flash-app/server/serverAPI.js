@@ -8,7 +8,7 @@ const express = require('express'),
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', async (req, res) => {
+app.get('/', async (_, res) => {
   return res.send("success");
 });
 

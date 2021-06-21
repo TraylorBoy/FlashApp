@@ -6,6 +6,7 @@ const BN = require('bn.js');
 
 let props = {
   _web3: null,
+  _provider: null,
   address: '',
   funds: new BN(0),
   flash_config: {}
@@ -16,6 +17,7 @@ const setup = async (config, provider, port) => {
   console.log('Unpacking config');
   // Unpack LOAN_SETTINGS sent from client
   props._web3 = new Web3(provider | 'ws://localhost:' + port);
+  props._provider = provider | 'ws://localhost:' + port;
   props.address = config.WALLET.address;
   props.funds = new BN(config.WALLET.balance);
 
