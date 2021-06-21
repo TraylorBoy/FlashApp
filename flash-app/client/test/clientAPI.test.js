@@ -1,16 +1,24 @@
 require('dotenv').config();
-const axios = require('axios');
 const client = require('../clientAPI');
 
 const TEST_CONFIG = {
-  WALLET: {address: process.env.WALLET_ADDRESS, balance: (0.3).toFixed(18)},
+  WALLET: {address: '0x16435B303242Dbb0bB065433fD34f15aeB2A49CA', balance: (0.3).toFixed(18)},
   DEPOSIT_AMOUNT: (0.0009).toFixed(18),
   LOAN_AMOUNT: (0.01).toFixed(18),
   TOKEN: '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
 };
 
-test('requests server to setup flashloan via interacting with the FlashApp conract on the Kovan Ethereum test network with settings supplied by user', async () => {
-  let res = await client.setupLoan(TEST_CONFIG);
+test('sends a get request to test server communication', async () => {
+  let res = await client.testRequest();
   expect.assertions(res);
-  return expect(res).toBe('success');
+
+  const data = res.data;
+
+  return expect(data.message).toBe('success');
 });
+
+/*test('requests server to setup flashloan via interacting with the FlashApp conract on the Kovan Ethereum test network with settings supplied by user', async () => {
+  let res = await client.setupLoan(TEST_CONFIG);
+
+  return expect(res).toBe('success');
+});*/

@@ -8,7 +8,17 @@ const express = require('express'),
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/', async (req, res) => {
+  return res.send({
+    status: 'success',
+    message: '',
+    data: null
+  });
+});
+
 app.post('/setupFlashLoan', async (req, res) => {
+  console.log('Request: setupFlashLoan');
+
   try {
     const CONFIG = await req.body.json();
 
