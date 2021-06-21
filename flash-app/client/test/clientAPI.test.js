@@ -10,18 +10,21 @@ const TEST_CONFIG = {
 };
 
 describe('testRequest', () => {
-  it('should send a GET request to `localhost:3000/` and receive a success message', async () => {
-    await client._testRequest().then(({data}) => {
+  it('should send a GET request to `localhost:<PORT>/` and receive a success message', async () => {
+    return await client._testRequest().then(({data}) => {
       assert.equal(data, 'success');
     });
   });
 });
 
 describe('setupLoan', () => {
-  it('should send the TEST_CONFIG to the server and receive a success message', async () => {
-    await client.setupLoan(TEST_CONFIG).then(({ data }) => {
+  it('should send the TEST_CONFIG to the server and receive a transaction', async () => {
+    return await client.setupLoan(TEST_CONFIG)
+    .then(({data}) => {
       // TODO - assert Deposit event on tx
       assert.equal(data.message, 'success');
+      assert.equal(data.payload.from, TEST_CONFIG.WALLET.address);
     });
+
   });
 });

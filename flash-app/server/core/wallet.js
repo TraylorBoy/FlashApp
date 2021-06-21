@@ -5,7 +5,6 @@ const Web3 = require('web3');
 
 let props = {
   _web3: null,
-  _provider: null,
   address: '',
   funds: 0,
   flash_config: {}
@@ -15,8 +14,8 @@ let props = {
 const setup = async (config, provider, port) => {
   console.log('Unpacking config');
   // Unpack LOAN_SETTINGS sent from client
-  props._web3 = new Web3(provider | 'ws://localhost:' + port);
-  props._provider = provider | 'ws://localhost:' + port;
+  props._web3 = new Web3(new Web3.providers.HttpProvider(provider));
+
   props.address = config.WALLET.address;
   props.funds = config.WALLET.balance;
 
@@ -27,7 +26,7 @@ const setup = async (config, provider, port) => {
   return props;
 };
 
-module.exports = Wallet = async (config, provider=null, port=3000) => {
+module.exports = Wallet = async (config, provider, port=3000) => {
   const wallet = await setup(config, provider, port);
 
   return wallet;
