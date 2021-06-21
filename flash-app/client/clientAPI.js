@@ -3,9 +3,6 @@ const axios = require('axios');
 
 const port = process.env.PORT || 8080;
 const url = 'http://localhost:' + port;
-const headers = {
-  'Content-Type': 'application/json'
-}
 
 const _testRequest = () => {
   const uri = '/';
@@ -42,7 +39,26 @@ const setupLoan = async (config) => {
   })
 };
 
+const startLoan = async (tx) => {
+  const uri = '/startLoan';
+
+  console.log('Sending POST request to server at: ', url + uri);
+  console.log('Payload: ', tx);
+
+  return new Promise(async (resolve, reject) => {
+    try {
+      const res = await axios.post(url + uri, tx);
+      resolve(res);
+    } catch (err) {
+      console.log('An error occurred while trying to test the server communication. Please check the console for more information.');
+      console.log(err);
+      reject(err);
+    }
+  })
+}
+
 module.exports = {
   _testRequest,
-  setupLoan
+  setupLoan,
+  startLoan
 };
