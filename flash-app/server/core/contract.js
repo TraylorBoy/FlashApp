@@ -2,29 +2,18 @@
 // - Setup script intended to be used with the FlashApp API (flashappi)
 // author: Marques Traylor
 const Contract = require('web3-eth-contract');
-
-let props = {
-  _provider: null,
-  abi: null,
-  address: "",
-}
+const _abi = require('./contracts/FlashApp.json');
 
 // Setup contract instance
-const setup = async (provider, abi, address) => {
+const setup = async (provider, address) => {
   console.log('Creating FlashApp contract');
+  Contract.setProvider(provider);
 
-  // Will be passed to new Contract instance
-  props._provider = provider;
-  props.abi = abi;
-  props.address = address;
-
-  return props;
+  return new Contract(_abi, address);
 }
 
-module.exports = FlashApp = async (provider, abi, address) => {
-  Contract.setProvider(provder);
-
-  const flashApp = new Contract(abi, address);
+module.exports = FlashApp = async (provider, address) => {
+  const flashApp = await setup(provider, address);
 
   return flashApp;
 }
