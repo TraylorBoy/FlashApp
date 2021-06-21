@@ -1,5 +1,5 @@
 import React from "react";
-import { MetaMaskButton, Button, Box, Flex } from "rimble-ui";
+import { MetaMaskButton, Button } from "rimble-ui";
 
 function CustomButton(props) {
   return(

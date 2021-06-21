@@ -41,7 +41,7 @@ function FlashLoan() {
       if (flag === 91) {}
 
     }
-  });
+  }, [depositAmount, flag, locked, lock]);
 
   const handleStart = () => {
     // Make sure user has enough funds to cover premium

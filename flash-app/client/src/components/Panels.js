@@ -1,13 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import { Flex, Box } from "rimble-ui";
 import StepOne from "./StepOne";
 import StepTwo from "./StepTwo";
 import StepThree from "./StepThree";
 
 function Panels(props) {
-  let [fee, setFee] = useState(0);
-  let [amount, setAmount] = useState(0);
-
   return (
     <Flex>
       <Box p={4} width={1/3}>

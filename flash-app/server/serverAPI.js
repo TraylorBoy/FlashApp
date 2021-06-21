@@ -43,14 +43,41 @@ app.post('/setupFlashLoan', async (req, res) => {
 
       console.log('FlashApp contract instance created at address: ', flashApp.options.address);
 
-      const web3 = wallet._web3;
-
       console.log('Depositing required premium to contract, amount: ', wallet.flash_config.fee);
 
-      // TODO: Deposit funds to contract
+      const web3 = wallet._web3;
+      const owing = web3.utils.toWei(wallet.flash_config.fee.toString());
+      const initialBalance = web3.utils.toWei(wallet.funds.toString());
 
-      // TODO: Send Deposit TX with success message
-      return res.send('success');
+      await flashApp.methods.deposit(owing).send({
+        from: wallet.address,
+        value: owing
+      })
+      .on('transactionHash', (hash) => {
+        console.log('Transaction sent, hash: ', hash);
+      })
+      .on('transactionConfirmed', (confirmationNumber, receipt) => {
+        console.log('Transaction confirmed!');
+        console.log('Confirmation #: ', confirmationNumber);
+        console.log('Receipt: ', receipt);
+      })
+      .on('receipt', (receipt) => {
+        console.log('Transaction complete, sending receipt to client');
+        console.log('Receipt: ', receipt);
+
+        return res.send({
+          message: 'success',
+          payload: receipt
+        });
+      })
+      .on('error', (err, receipt) => {
+        console.log('Transaction failed, sending error to client');
+        console.log('Error: ', err);
+        console.log('\nReceipt: ', receipt);
+        throw new Error(
+          err);
+      });
+
     });
   } catch (err) {
     console.log('An error occurred while trying to setup the Flash Loan. Please check the console!');
