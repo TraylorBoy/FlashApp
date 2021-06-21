@@ -10,12 +10,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 let STATE = {
-  _config: null,
   _wallet: null,
-  _contract: {
-    address: process.env.CONTRACT_ADDR,
-    instance: null
-  }
+  _contract: null,
+  _contractAddress: process.env.CONTRACT_ADDR
 }
 
 app.get('/', async (_, res) => {
@@ -27,26 +24,30 @@ app.post('/setupFlashLoan', async (req, res) => {
 
   try {
     const CONFIG = req.body;
-    const CONTRACT_ADDR = STATE._contract.address;
+    const CONTRACT_ADDR = STATE._contractAddress;
 
     if (!CONFIG) throw new Error('Invalid configuration: ', CONFIG);
-
-    // Store config global state
-    STATE._config = CONFIG;
 
     console.log('Received FlashLoan configuration: ', CONFIG);
     console.log('Setting up FlashLoan...');
 
     await Wallet(CONFIG).then(async (wallet) => {
-      // Update state with initialized web3 wallet
+      // Store wallet in global state
       STATE._wallet = wallet;
       console.log('Wallet created at address: ', wallet.address);
 
       const flashApp = await FlashApp(wallet._provider, CONTRACT_ADDR);
 
-      console.log('FlashApp contract instance created at address: ', CONTRACT_ADDR);
+      // Store contract in global state
+      STATE._contract = flashApp;
 
-      console.log(flashApp);
+      console.log('FlashApp contract instance created at address: ', flashApp.options.address);
+
+      const web3 = wallet._web3;
+
+      console.log('Depositing required premium to contract, amount: ', wallet.flash_config.fee);
+
+      // TODO: Deposit funds to contract
 
       // TODO: Send Deposit TX with success message
       return res.send('success');

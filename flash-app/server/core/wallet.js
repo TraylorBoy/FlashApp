@@ -2,13 +2,12 @@
 // - Setup script intended to be used with the FlashApp API (flashappi)
 // author: Marques Traylor
 const Web3 = require('web3');
-const BN = require('bn.js');
 
 let props = {
   _web3: null,
   _provider: null,
   address: '',
-  funds: new BN(0),
+  funds: 0,
   flash_config: {}
 };
 
@@ -19,11 +18,11 @@ const setup = async (config, provider, port) => {
   props._web3 = new Web3(provider | 'ws://localhost:' + port);
   props._provider = provider | 'ws://localhost:' + port;
   props.address = config.WALLET.address;
-  props.funds = new BN(config.WALLET.balance);
+  props.funds = config.WALLET.balance;
 
   props.flash_config.reserve = config.TOKEN;
-  props.flash_config.amount = new BN(config.LOAN_AMOUNT);
-  props.flash_config.fee = new BN(config.DEPOSIT_AMOUNT);
+  props.flash_config.amount = config.LOAN_AMOUNT;
+  props.flash_config.fee = config.DEPOSIT_AMOUNT;
 
   return props;
 };
