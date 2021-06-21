@@ -11,22 +11,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Web3 provider (i.e. INFURA) & Contract address
-const URL = process.env.URL;
-const ADDRESS = process.env.ADDR;
-
-let STATE = {
-  _wallet: null,
-  _contract: null,
-  _contractAddress: ADDRESS,
-  _provider: URL
-}
+const PROVIDER = process.env.URL;
+const CONTRACT_ADDRESS = process.env.ADDR;
 
 app.get('/', async (_, res) => {
+  console.log('GET Request: /');
   return res.send("success");
 });
 
 app.post('/setupFlashLoan', async (req, res) => {
-  console.log('Request: setupFlashLoan');
+  console.log('POST Request: setupFlashLoan');
 
   try {
     const CONFIG = req.body;
@@ -36,17 +30,12 @@ app.post('/setupFlashLoan', async (req, res) => {
     console.log('Received FlashLoan configuration: ', CONFIG);
     console.log('Setting up FlashLoan...');
 
-    await Wallet(CONFIG, STATE._provider).then(async (wallet) => {
-      // Store wallet in global state
-      STATE._wallet = wallet;
+    await Wallet(CONFIG, PROVIDER).then(async (wallet) => {
       console.log('Wallet created at address: ', wallet.address);
 
       const web3 = wallet._web3;
 
-      await FlashApp(STATE._provider, STATE._contractAddress).then(async (flashApp) => {
-        // Store contract in global state
-        STATE._contract = flashApp;
-
+      await FlashApp(PROVIDER, CONTRACT_ADDRESS).then(async (flashApp) => {
         console.log('FlashApp contract instance created at address: ', flashApp.options.address);
 
         const owing = web3.utils.toWei(wallet.flash_config.fee.toString());
@@ -75,6 +64,25 @@ app.post('/setupFlashLoan', async (req, res) => {
 
 });
 
+app.post('/startLoan', async (req, res) => {
+  console.log('POST Request: startLoan');
+
+  try {
+    const web3 = wallet._web3;
+    const signedTx = req.body;
+
+    await web3.eth.sendSignedTransaction(signedTx.rawTransaction).then(async (receipt) => {
+      console.log('FlashLoan completed, receipt: ', receipt);
+
+    })
+
+  } catch (err) {
+    console.log('An error occurred while trying to setup the Flash Loan. Please check the console!');
+    console.log(err);
+
+    return res.send(err);
+  }
+});
 
 app.listen(port);
 
