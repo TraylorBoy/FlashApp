@@ -9,7 +9,9 @@ const setup = async (provider, address) => {
   console.log('Creating FlashApp contract');
   Contract.setProvider(provider);
 
-  return new Contract(_abi, address);
+  const FlashApp = new Contract(_abi.abi, address);
+
+  return FlashApp;
 }
 
 module.exports = FlashApp = async (provider, address) => {

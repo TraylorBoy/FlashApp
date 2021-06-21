@@ -37,7 +37,7 @@ app.post('/setupFlashLoan', async (req, res) => {
     console.log('Received FlashLoan configuration: ', CONFIG);
     console.log('Setting up FlashLoan...');
 
-    await Wallet(CONFIG).then(wallet => {
+    await Wallet(CONFIG).then(async (wallet) => {
       // Update state with initialized web3 wallet
       STATE._wallet = wallet;
       console.log('Wallet created at address: ', wallet.address);
