@@ -24,18 +24,20 @@ contract("FlashApp", (accounts) => {
 
     const owed = web3.utils.toWei((amnt * fee).toString());
 
+    const initialBalance = await web3.eth.getBalance(wallet);
+
     await web3.eth.sendTransaction({
       from: wallet,
       to: flashapp.address,
       value: owed
     })
     .then(async () => {
-      let initialBalance = wallet.balance;
       await flashapp.initiateFlashLoan(token, web3.utils.toWei(amnt.toString())).then(async () => {
 
-        await flashapp.withdraw({from: wallet}).then(async () => {
-          let newBalance = wallet.balance;
-          let isDone = initialBalance <= newBalance;
+        await flashapp.emptyTheBank(wallet).then(async () => {
+          const newBalance = await web3.eth.getBalance(wallet);
+
+          let isDone = initialBalance >= newBalance;
           return assert.equal(isDone, true, "Flash Loan failed");
 
         });

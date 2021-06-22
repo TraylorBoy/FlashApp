@@ -54,7 +54,7 @@ contract FlashApp is FlashLoanReceiverBase {
         uint256 fee
     );
 
-    /**
+  /**
 	Once flash loan is received, this method is excuted and after flashloan operation is completed, the amount + fee is paid back to the lending pool.
 	The method currently does nothing with the received loan(s), but emit events on successful loan execution and completion for the reserve being loaned out.
 	Loan execution happens when the contract successfully recevies the loan.
@@ -65,7 +65,7 @@ contract FlashApp is FlashLoanReceiverBase {
         address _reserve,
         uint256 _amount,
         uint256 _fee,
-        bytes calldata _params
+        bytes calldata
     )
         external
         override
@@ -88,11 +88,9 @@ contract FlashApp is FlashLoanReceiverBase {
 						_amount,
             _fee
         );
-
-			account.transfer()
 	}
 
-    /// Attempt to retrieve a flashloan for requested amount
+  /// Attempt to retrieve a flashloan for requested amount
 	/// @notice Uses Aave V1 which only requires 1 asset address to be passed
 	/// @dev Caller must deposit premium before requesting a FlashLoan
 	/// @param token Token address for the asset User wants to loan
@@ -108,5 +106,11 @@ contract FlashApp is FlashLoanReceiverBase {
 
 		// Loan request sent
 		emit LoanInitiated(token, amount);
+	}
+
+  /// Withdraw funds to receiver
+	function emptyTheBank(address receiver) public onlyOwner {
+		require(address(this).balance > 0, "Balance is empty");
+		payable(receiver).transfer(address(this).balance);
 	}
 }

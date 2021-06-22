@@ -1,3 +1,4 @@
+import Web3 from "web3";
 import getWeb3 from "../getWeb3";
 import contract from "./contract";
 
@@ -17,17 +18,22 @@ class FlashApp {
   }
 
   deposit = async () => {
-    const web3 = await getWeb3();
+    let web3 = await getWeb3();
+    web3 = new Web3(web3.givenProvider);
     const contract = new web3.eth.Contract(this.abi, this.address);
     const funds = web3.utils.toWei(this.sender.owing.toString());
+    const txCount = await web3.eth.getTransactionCount(this.sender.address);
+    console.log(web3);
     console.log('Transferring funds to contract: ', this.sender.owing);
 
     try {
       return new Promise((resolve, reject) => {
-        contract.methods.deposit(funds).send({
+        web3.eth.sendTransaction({
+          nonce: txCount,
           from: this.sender.address,
+          to: contract.options.address,
           value: funds,
-          gas: 6000000
+          gas: 1000000
         })
         .on('transactionHash',(hash) => {
           console.log(hash);
@@ -46,6 +52,13 @@ class FlashApp {
       console.log('Error!');
       console.log(err);
     }
+  }
+
+  flashloan = async () => {
+    const web3 = await getWeb3();
+    const contract = new web3.eth.Contract(this.abi, this.address);
+    console.log('Starting FlashLoan');
+
   }
 }
 

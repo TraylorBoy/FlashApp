@@ -15,37 +15,6 @@ const contract = {
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256"
-      }
-    ],
-    name: "Deposit",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "balance",
-        type: "uint256"
-      },
-      {
         indexed: false,
         internalType: "address",
         name: "reserve",
@@ -70,12 +39,6 @@ const contract = {
   {
     anonymous: false,
     inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
       {
         indexed: false,
         internalType: "address",
@@ -102,12 +65,6 @@ const contract = {
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
-      {
         indexed: false,
         internalType: "address",
         name: "reserve",
@@ -117,12 +74,6 @@ const contract = {
         indexed: false,
         internalType: "uint256",
         name: "amount",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "fee",
         type: "uint256"
       }
     ],
@@ -174,25 +125,6 @@ const contract = {
     type: "event"
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "from",
-        type: "address"
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256"
-      }
-    ],
-    name: "Withdrawal",
-    type: "event"
-  },
-  {
     inputs: [],
     name: "addressesProvider",
     outputs: [
@@ -239,6 +171,19 @@ const contract = {
     type: "function"
   },
   {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_assetAddress",
+        type: "address"
+      }
+    ],
+    name: "withdraw",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
     stateMutability: "payable",
     type: "receive"
   },
@@ -261,7 +206,7 @@ const contract = {
       },
       {
         internalType: "bytes",
-        name: "_params",
+        name: "",
         type: "bytes"
       }
     ],
@@ -291,53 +236,14 @@ const contract = {
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "amount",
-        type: "uint256"
-      }
-    ],
-    name: "deposit",
-    outputs: [],
-    stateMutability: "payable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "withdraw",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
         internalType: "address",
-        name: "_assetAddress",
+        name: "receiver",
         type: "address"
       }
     ],
-    name: "withdraw",
+    name: "emptyTheBank",
     outputs: [],
     stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "account",
-        type: "address"
-      }
-    ],
-    name: "balanceFor",
-    outputs: [
-      {
-        internalType: "uint256",
-        name: "",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
     type: "function"
   }
 ]
