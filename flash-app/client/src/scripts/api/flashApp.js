@@ -1,4 +1,3 @@
-import Web3 from "web3";
 import getWeb3 from "../getWeb3";
 import contract from "./contract";
 
@@ -17,23 +16,34 @@ class FlashApp {
     };
   }
 
-  deposit = async () => {
+  run = async () => {
     let web3 = await getWeb3();
-    web3 = new Web3(web3.givenProvider);
     const contract = new web3.eth.Contract(this.abi, this.address);
     const funds = web3.utils.toWei(this.sender.owing.toString());
+    const loanAmount = web3.utils.toWei(this.sender.amount.toString());
     const txCount = await web3.eth.getTransactionCount(this.sender.address);
-    console.log(web3);
     console.log('Transferring funds to contract: ', this.sender.owing);
 
     try {
       return new Promise((resolve, reject) => {
-        web3.eth.sendTransaction({
+        /*contract.initiateFlashLoan(this.sender.token, loanAmount, {
+          from: this.sender.address,
+          to: this.address,
+          value: funds,
+          gas: 10000000
+        })*/
+        /*web3.eth.sendTransaction({
           nonce: txCount,
           from: this.sender.address,
           to: contract.options.address,
           value: funds,
           gas: 1000000
+        })*/
+        contract.methods.initiateFlashLoan(this.sender.token, loanAmount).send({
+          from: this.sender.address,
+          to: this.address,
+          value: funds,
+          gas: 10000000
         })
         .on('transactionHash',(hash) => {
           console.log(hash);

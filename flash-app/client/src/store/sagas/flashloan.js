@@ -9,7 +9,7 @@ function* setup() {
   console.log(config)
 
   const flashApp = new FlashApp(config);
-  const tx = yield call(flashApp.deposit);
+  const tx = yield call(flashApp.run);
   console.log(tx);
 }
 
