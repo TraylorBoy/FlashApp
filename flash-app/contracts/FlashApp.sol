@@ -72,8 +72,14 @@ contract FlashApp is FlashLoanReceiverBase {
 	/// @dev Caller must deposit premium before requesting a FlashLoan, they may send it along with this method call
 	/// @param token Token address for the asset User wants to loan
 	/// @param amount Amount of tplem to request for the loan
-	function requestLoan(address token, uint256 amount) public payable {
-
+	function requestLoan(
+		address token,
+		uint256 amount
+	)
+		public
+		payable
+	{
+		// Pass data to `executeOperation`
 		bytes memory params = "";
 
 		// Uses Aave V1 addressProvider
