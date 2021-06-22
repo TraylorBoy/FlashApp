@@ -13,8 +13,8 @@ module.exports = {
     kovan: {
       provider: () => {
         return new HDWalletProvider({
-          privateKeys: [process.env.WALLET_KEY],
-          providerOrUrl: process.env.KOVAN_URL,
+          privateKeys: [process.env.KEY],
+          providerOrUrl: process.env.PROVIDER,
           numberOfAddresses: 1,
           shareNonce: true,
           derivationPath: "m/44'/1'/0'/0/"
@@ -26,7 +26,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "^0.6.6",
+      version: "0.6.6",
       settings:{
         optimizer:{
           enabled: true

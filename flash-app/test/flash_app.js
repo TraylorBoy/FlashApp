@@ -13,45 +13,6 @@ contract("FlashApp", (accounts) => {
 
   });
 
-  it("should retrieve the balance of an account", async () => {
-
-    const bal = await flashapp.balanceFor.call(wallet);
-
-    assert.equal(bal, 0);
-
-  });
-
-  it("should deposit ether", async () => {
-
-    const amount = "0.00001"
-
-    await flashapp.deposit(web3.utils.toWei(amount), {from: wallet, value: web3.utils.toWei(amount)}).then(async () => {
-
-      const bal = await flashapp.balanceFor.call(wallet);
-
-      return assert.equal(bal, web3.utils.toWei(amount), "Deposit failed");
-
-    });
-
-  });
-
-  it("should withdraw deposited ether from contract", async () => {
-
-    const amount = "0.00001";
-
-    await flashapp.deposit(web3.utils.toWei(amount), { from: wallet, value: web3.utils.toWei(amount) }).then(async () => {
-
-      await flashapp.withdraw().then(async () => {
-
-        const bal = await flashapp.balanceFor(wallet);
-
-        assert.equal(bal, 0);
-
-      });
-
-    });
-
-  });
 
   it("should deposit fee to contract, initiate a flashloan, then withdraw left over funds back to user wallet", async () => {
 
@@ -63,27 +24,26 @@ contract("FlashApp", (accounts) => {
 
     const owed = web3.utils.toWei((amnt * fee).toString());
 
-    await flashapp.deposit(owed, {from: wallet, value: owed}).then(async () => {
+    const initialBalance = await web3.eth.getBalance(wallet);
 
-      const bal = await flashapp.balanceFor(wallet);
-
-      assert.equal(bal, owed, "Deposit failed");
-
-    }).then(async () => {
-
+    await web3.eth.sendTransaction({
+      from: wallet,
+      to: flashapp.address,
+      value: owed
+    })
+    .then(async () => {
       await flashapp.initiateFlashLoan(token, web3.utils.toWei(amnt.toString())).then(async () => {
 
-        await flashapp.withdraw().then(async () => {
+        await flashapp.emptyTheBank(wallet).then(async () => {
+          const newBalance = await web3.eth.getBalance(wallet);
 
-          const isDone = await flashapp.balanceFor(wallet) == 0 ? true : false;
-
-          return assert.equal(isDone, true, "Flash Loan failed - (Either during withdrawal or flashloan execution)");
+          let isDone = initialBalance >= newBalance;
+          return assert.equal(isDone, true, "Flash Loan failed");
 
         });
 
       });
-    });
-
+    })
   });
 
 });

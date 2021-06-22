@@ -1,4 +1,4 @@
-// Web3 MetaMask Wallet Connection Wrapper
+// Web3 MetaMask Wallet Connection Utility Wrapper
 // - Retrieves the Network ID, Address, and Balance of a MetaMask wallet
 // author: Marques Traylor
 import getWeb3 from "./getWeb3";
