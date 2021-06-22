@@ -17,7 +17,7 @@ abstract contract FlashLoanReceiverBase is IFlashLoanReceiver, Withdrawable {
         addressesProvider = ILendingPoolAddressesProvider(_addressProvider);
     }
 
-    receive() payable external virtual {}
+    receive() payable external {}
 
     function transferFundsBackToPoolInternal(address _reserve, uint256 _amount) internal {
         address payable core = addressesProvider.getLendingPoolCore();
