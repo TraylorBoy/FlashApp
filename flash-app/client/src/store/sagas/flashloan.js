@@ -1,5 +1,5 @@
 import FlashApp from "../../scripts/api/flashApp";
-import { apply, all, takeEvery, take, select, call } from "redux-saga/effects";
+import { all, take, select, call } from "redux-saga/effects";
 
 function* setup() {
   const action = yield take("flashloan/setupLoan");
@@ -9,7 +9,7 @@ function* setup() {
   console.log(config)
 
   const flashApp = new FlashApp(config);
-  const tx = yield apply(flashApp, flashApp.deposit);
+  const tx = yield call(flashApp.deposit);
   console.log(tx);
 }
 

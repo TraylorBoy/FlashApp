@@ -19,7 +19,7 @@ function FlashLoan() {
 
   useEffect(() => {
     // Unlock button
-    if (depositAmount >= 0.01 && flag === 86) setLock(1);
+    if (loanAmount >= 0.01 && flag === 86) setLock(1);
     // Update lock
     if (locked !== lock) lockStatus(lock ? false : true);
 
@@ -53,7 +53,7 @@ function FlashLoan() {
 
       const sender = wallet.address;
       const balance = wallet.balance;
-      
+
       startFlashLoan({
         sender,
         balance,

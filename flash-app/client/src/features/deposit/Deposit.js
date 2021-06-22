@@ -23,7 +23,7 @@ function Deposit() {
   const handleSubmit = () => {
     if (user.connection.success && loanAmount >= 0.01) {
       // Format
-      let _fee = parseFloat(loanAmount).toFixed(18);
+      let _fee = parseFloat(fee).toFixed(18);
       let _loanAmount = parseFloat(loanAmount).toFixed(18);
 
       dispatch(setAmount({_fee, _loanAmount}));
