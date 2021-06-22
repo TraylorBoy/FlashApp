@@ -35,7 +35,9 @@ function FlashLoan() {
       if (flag === 103) setFlag(86); // Unlock state
 
       // TODO - Setup FlashLoan
-      if (flag === 99) {}
+      if (flag === 99) {
+
+      }
 
       // TODO - Setup middleware
       if (flag === 91) {}
@@ -49,8 +51,12 @@ function FlashLoan() {
       setLock(0); // Lock state
       setFlag(91); // Setup middleware
 
+      const sender = wallet.address;
+      const balance = wallet.balance;
+      
       startFlashLoan({
-        wallet,
+        sender,
+        balance,
         depositAmount,
         loanAmount,
         token
@@ -66,7 +72,6 @@ function FlashLoan() {
     setFlag(99) // Setup FlashLoan
 
     dispatch(setupLoan(LOAN_SETTINGS));
-
 
   }
 

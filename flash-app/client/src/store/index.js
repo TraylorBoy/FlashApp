@@ -1,5 +1,8 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
+
+import rootSaga from "./sagas/flashloan";
+
 import UserReducer from "../features/user/UserSlice";
 import DepositReducer from "../features/deposit/DepositSlice";
 import FlashLoanReducer from "../features/flashloan/FlashLoanSlice";
@@ -16,7 +19,6 @@ const store = configureStore({
   middleware
 });
 
-// TODO - Create saga's for API interaction
-//saga.run()
+saga.run(rootSaga);
 
 export default store;

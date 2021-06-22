@@ -4,7 +4,8 @@ export const FlashLoanSlice = createSlice({
   name: "flashloan",
   initialState: {
     CONFIG: {
-      WALLET: {address: "", balance: 0},
+      SENDER: "",
+      BALANCE: 0,
       DEPOSIT_AMOUNT: 0,
       LOAN_AMOUNT: 0,
       TOKEN: ""
@@ -14,7 +15,8 @@ export const FlashLoanSlice = createSlice({
     setupLoan: (state, action) => {
       const settings = action.payload;
 
-      state.CONFIG.WALLET = settings.wallet;
+      state.CONFIG.SENDER = settings.sender;
+      state.CONFIG.BALANCE = settings.balance;
       state.CONFIG.DEPOSIT_AMOUNT = settings.depositAmount;
       state.CONFIG.LOAN_AMOUNT = settings.loanAmount;
       state.CONFIG.TOKEN = settings.token;

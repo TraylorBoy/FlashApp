@@ -14,7 +14,7 @@ module.exports = {
       provider: () => {
         return new HDWalletProvider({
           privateKeys: [process.env.KEY],
-          providerOrUrl: process.env.URL,
+          providerOrUrl: process.env.PROVIDER,
           numberOfAddresses: 1,
           shareNonce: true,
           derivationPath: "m/44'/1'/0'/0/"
