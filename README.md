@@ -7,6 +7,6 @@ In order to run the application, cd into the src/client folder and run the comma
 
 Running the command below will allow you to run the contract tests and see the results.
 
-#`truffle test --network kovan`
+# `truffle test --network kovan`
 
 # Contract address: https://kovan.etherscan.io/address/0xcec6effec8189fbefbb2b1abf33a13111ffda4c9
