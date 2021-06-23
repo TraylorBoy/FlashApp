@@ -1,6 +1,5 @@
 require("dotenv").config();
 const FlashApp = artifacts.require("FlashApp");
-const BN = require("bn.js");
 const assert = require("assert");
 const { ethers } = require("ethers");
 
@@ -12,6 +11,14 @@ contract("FlashApp", () => {
   let flashapp;
   let wallet;
   let itx; // Infura ITX Provider https://infura.io/docs/transactions
+  let parser;
+  let data = {
+    amount: 0,
+    fee: 0,
+    owed: 0,
+    forAmount: 0,
+    token: ""
+  }// Parameters for requesting flashloan
 
   beforeEach("should setup the flashapp contract and test wallet account instances", async () => {
 
@@ -24,6 +31,13 @@ contract("FlashApp", () => {
 
     wallet = new ethers.Wallet(process.env.KEY, itx); // Create wallet for transactions to be routed through ITX -> Kovan
 
+    parser = ethers.utils.parseUnits;
+
+    data.amount = ethers.BigNumber.from(parser(TEST_AMOUNT, "ether"));
+    data.fee = ethers.BigNumber.from(9);
+    data.owed = parser((data.amount.mul(data.fee).div(10000)).toString(), "wei");
+    data.forAmount = parser(data.amount.toString(), "wei");
+    data.token = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"; // Kovan Eth
   });
 
   it("should check ITX balance > 0 of developer's account, if not then it transfers eth to the ITX account", async () => {
@@ -34,7 +48,7 @@ contract("FlashApp", () => {
       // Send amount to ITX account
       const tx = await wallet.sendTransaction({
         to: INFURA_ITX,
-        value: ethers.utils.parseUnits(TEST_AMOUNT, "ether")
+        value: parser(TEST_AMOUNT, "ether")
       });
 
       // Waiting for transaction to be mined
@@ -50,30 +64,48 @@ contract("FlashApp", () => {
   });
 
 
-  /*it("should send premium from wallet to contract, perform flashloan then emit event LoanExecuted(reverse, amount, fee), pay back loan and emit event LoanCompleted(true/false)", async () => {
+  it("should deposit fee to the contract", async () => {
+    // Deposit the fee to the contract
+    return await wallet.sendTransaction({
+      nonce: await wallet.getTransactionCount(),
+      to: flashapp.address,
+      value: data.owed
+    })
+    .then(async (depositTX) => {
+      console.log("Deposit receipt: ", depositTX, "\n Waiting for it to be mined");
+      await depositTX.wait();
 
-    const token = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"; // Kovan Eth
+      const balance = await flashapp.getBalance({
+        from: wallet.address
+      });
+      const etherBalance = parser(balance.toString(), "ether");
 
-    const amnt = new BN(0.01);
-    const fee = new BN(0.09);
+      console.log("Contract Balance: " + etherBalance);
+      assert.equal(etherBalance >= data.owed, true, "Deposit failed");
+  });
 
-    const owed = web3.utils.toWei((amnt.mul(fee)).toString());
-    console.log(owed.toString());
+  /*it("should perform flashloan then emit event LoanExecuted(reverse, amount, fee), pay back loan and emit event LoanCompleted(true/false)", async () => {
+    console.log("Depositing amount: " + owed + " to contract at: " + flashapp.address);
 
-    const initialBalance = await web3.eth.getBalance(wallet);
+    // Grab initial balance
+    const startBalance = await wallet.getBalance();
+    let txCount = await wallet.getTransactionCount();
 
+    console.log("Requesting contract to start the loan operation");
+    txCount = await wallet.getTransactionCount();
     return await flashapp.requestLoan(
       token,
-      web3.utils.toWei(amnt),
+      forAmount,
       {
-        from: wallet,
-        value: owed
+        nonce: txCount,
+        from: wallet.address
       }
     )
-    .then(async () => {
-      const newBalance = await web3.eth.getBalance(wallet);
+    .then(async (loanTX) => {
+      console.log("FlashLoan receipt: ", loanTX);
+      const currentBalance = await itx.send("relay_getBalance", [wallet.address]);
 
-      assert.equal(initialBalance >= newBalance, "Loan failed to complete.");
-    });
-  });*/
+      assert.equal(startBalance.balance >= currentBalance.balance, "Loan failed to complete.");
+    });*/
+  });
 });

@@ -72,13 +72,7 @@ contract FlashApp is FlashLoanReceiverBase {
 	/// @dev Caller must deposit premium before requesting a FlashLoan, they may send it along with this method call
 	/// @param token Token address for the asset User wants to loan
 	/// @param amount Amount of tplem to request for the loan
-	function requestLoan(
-		address token,
-		uint256 amount
-	)
-		public
-		payable
-	{
+	function requestLoan(address token, uint256 amount) public onlyOwner {
 		// Pass data to `executeOperation`
 		bytes memory params = "";
 
@@ -86,6 +80,12 @@ contract FlashApp is FlashLoanReceiverBase {
 		ILendingPool lendingPool = ILendingPool(addressesProvider.getLendingPool());
 
 		// Request loan for amount of token
-		lendingPool.flashLoan(payable(msg.sender), token, amount, params);
+		lendingPool.flashLoan(address(this), token, amount, params);
+	}
+
+	/// Returns the current contract balance to the caller
+	/// @dev Used for checking if the user successfully sent over the premium
+	function getBalance() public view returns (uint) {
+		return address(this).balance;
 	}
 }
