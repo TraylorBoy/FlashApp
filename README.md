@@ -9,4 +9,5 @@ Running the command below will allow you to run the contract tests and see the r
 
 # `truffle test --network kovan`
 
-# Contract address: https://kovan.etherscan.io/address/0xcec6effec8189fbefbb2b1abf33a13111ffda4c9
+# Contract address: 0xd36dE22f318Cd4eAa6980053E187cc893632E4e7
+https://kovan.etherscan.io/address/0xd36dE22f318Cd4eAa6980053E187cc893632E4e7#contracts

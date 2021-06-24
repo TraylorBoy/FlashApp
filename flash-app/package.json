@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "test": "truffle test --network kovan"
+    "test": "truffle test --network kovan",
+    "compile": "truffle compile --network kovan",
+    "deploy": "truffle migrate --network kovan"
   },
   "dependencies": {
     "@truffle/hdwallet-provider": "^1.4.1",
