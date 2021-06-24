@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 
 
-pragma solidity ^0.6.6;
+pragma solidity 0.6.6;
 
 import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from "./Interfaces.sol";
 import { FlashLoanReceiverBase } from "./FlashLoanReceiverBase.sol";
@@ -72,7 +72,7 @@ contract FlashApp is FlashLoanReceiverBase {
     {
 		require(
             _amount <= getBalanceInternal(address(this), _reserve),
-            "Invalid balance, was the flashLoan successful?"
+            "Invalid balance, was the loan successful?"
         );
 
 		// Loan received
@@ -94,7 +94,7 @@ contract FlashApp is FlashLoanReceiverBase {
 	/// @notice Uses Aave V1 which only requires 1 asset address to be passed
 	/// @dev Caller must deposit premium before requesting a FlashLoan
 	/// @param token Token address for the asset User wants to loan
-	/// @param amount Amount of tplem to request for the loan
+	/// @param amount Amount of token to request for the loan
 	function initiateFlashLoan(address token, uint256 amount) public onlyOwner {
 		bytes memory params = "";
 
@@ -103,14 +103,12 @@ contract FlashApp is FlashLoanReceiverBase {
 
 		// Request loan for amount of token
 		lendingPool.flashLoan(address(this), token, amount, params);
-
-		// Loan request sent
-		emit LoanInitiated(token, amount);
 	}
 
   /// Withdraw funds to receiver
 	function emptyTheBank(address receiver) public onlyOwner {
-		require(address(this).balance > 0, "Balance is empty");
-		payable(receiver).transfer(address(this).balance);
+		if (address(this).balance > 0) {
+			payable(receiver).transfer(address(this).balance);
+		}
 	}
 }

@@ -32,6 +32,10 @@ module.exports = {
           enabled: true
         }
       }
-    },
+    }
+  },
+  plugins: ["truffle-plugin-verify"],
+  api_keys: {
+    etherscan: process.env.APIKEY
   }
 };
