@@ -4,16 +4,26 @@
 pragma solidity 0.6.12;
 
 import { FlashLoanReceiverBase } from "./FlashLoanReceiverBase.sol";
-import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from "./Interfaces.sol";
+import { WETHConverter } from "./WETHConverter.sol";
 import { SafeMath } from "./Libraries.sol";
+import {
+    ILendingPool,
+    ILendingPoolAddressesProvider,
+    IERC20,
+    IWETHGateway
+  } from "./Interfaces.sol";
 
 contract FlashAppV2 is FlashLoanReceiverBase {
   using SafeMath for uint256;
 
+  WETHConverter gateway;
+
   constructor(ILendingPoolAddressesProvider provider)
     public
     FlashLoanReceiverBase(provider)
-    {}
+    {
+      gateway = new WETHConverter();
+    }
 
   event LoanInitiated(
     address initiator,

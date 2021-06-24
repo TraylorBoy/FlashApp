@@ -1,0 +1,2357 @@
+{
+  "contractName": "WETHConverter",
+  "abi": [
+    {
+      "inputs": [],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "stateMutability": "payable",
+      "type": "receive"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "convert",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"convert\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"stateMutability\":\"payable\",\"type\":\"receive\"}],\"devdoc\":{\"author\":\"Marques Traylor\",\"details\":\"Uses Kovan WETH as default\",\"kind\":\"dev\",\"methods\":{\"constructor\":{\"details\":\"The FlashApp contract is deployed on the kovan network\"}},\"stateVariables\":{\"wETHGatewayProvider\":{\"details\":\"All addresses are from the Kovan Public TestNet\"},\"wethGateway\":{\"details\":\"wethGateway Contract to convert callers native eth to weth\"}},\"title\":\"Native ETH to WETH Converter\",\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":\"Address to the WETHGateway Contract\"},\"version\":1}},\"settings\":{\"compilationTarget\":{\"/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/WETHConverter.sol\":\"WETHConverter\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/Interfaces.sol\":{\"keccak256\":\"0x16081ac6bfa7451639e1272b7a360db3c7cd9086d288cd2a39096f85d5560802\",\"license\":\"agpl-3.0\",\"urls\":[\"bzz-raw://cd110c2470bcb4c358e234a4df96a47fadea8aaf71df8158aabb7388c30e91ff\",\"dweb:/ipfs/QmVSXU9Zdeka7T96DPu4ZHo8Q1E49bFSC4S6tPGkTtys47\"]},\"/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/Libraries.sol\":{\"keccak256\":\"0xc67a6311177ef61fcd4bfa775845d0fac58617702198aec8eaa37738a904b22e\",\"license\":\"agpl-3.0\",\"urls\":[\"bzz-raw://871fc5e0ab9c1b5326e7a95598297254df100faa18d06b8ee066cfc96a47cb21\",\"dweb:/ipfs/QmYwFqAj564at5XsK4B1fj1bbysbS82BsE9uuq7kwgR1Jb\"]},\"/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/WETHConverter.sol\":{\"keccak256\":\"0x80f76f785fde8993c03aa1b498df7068031aa87a12b8f26901c915f0cbdc9b7d\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://8de48117a187e30bda7e77d3d6a71af19a0eaddb03c5dd07419f45e8cc9ece08\",\"dweb:/ipfs/QmZhKJHgdXdc3tvYB4K8SSwUJpVMtXASJmcMysFQap5Gyi\"]}},\"version\":1}",
+  "bytecode": "0x60c06040527fe0fba4fc209b4948668006b2be61711b7f465bae0000000000000000000000006080527fd0a1e359811322d97991e03f863a0c30c2cf029c00000000000000000000000060a05234801561005857600080fd5b50600080546001600160a01b03191673a61ca04df33b72b235a8a28cfb535bb7a5271b7017905560805160601c60a05160601c61018a6100a2600039508060a7525061018a6000f3fe6080604052600436106100225760003560e01c8063a3908e1b1461002e57610029565b3661002957005b600080fd5b61004b6004803603602081101561004457600080fd5b503561004d565b005b34811461008b5760405162461bcd60e51b815260040180806020018281038252602f815260200180610126602f913960400191505060405180910390fd5b600080546040805163474cf53d60e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301523360248301819052604483018690529251929493169263474cf53d923492606480820193929182900301818588803b15801561010857600080fd5b505af115801561011c573d6000803e3d6000fd5b5050505050505056fe416d6f756e7420636f6e76657274696e6720697320646966666572656e74207468616e20616d6f756e742073656e74a2646970667358221220f701034199bac0d1871f68667c52b974d835565afcf11dd91a48e680f7c8c9d764736f6c634300060c0033",
+  "deployedBytecode": "0x6080604052600436106100225760003560e01c8063a3908e1b1461002e57610029565b3661002957005b600080fd5b61004b6004803603602081101561004457600080fd5b503561004d565b005b34811461008b5760405162461bcd60e51b815260040180806020018281038252602f815260200180610126602f913960400191505060405180910390fd5b600080546040805163474cf53d60e01b81526001600160a01b037f0000000000000000000000000000000000000000000000000000000000000000811660048301523360248301819052604483018690529251929493169263474cf53d923492606480820193929182900301818588803b15801561010857600080fd5b505af115801561011c573d6000803e3d6000fd5b5050505050505056fe416d6f756e7420636f6e76657274696e6720697320646966666572656e74207468616e20616d6f756e742073656e74a2646970667358221220f701034199bac0d1871f68667c52b974d835565afcf11dd91a48e680f7c8c9d764736f6c634300060c0033",
+  "immutableReferences": {
+    "1374": [
+      {
+        "length": 32,
+        "start": 167
+      }
+    ]
+  },
+  "sourceMap": "213:1098:4:-:0;;;-1:-1:-1;;;492:84:4;;-1:-1:-1;;;580:76:4;;769:85;;;;;;;;;-1:-1:-1;802:11:4;:47;;-1:-1:-1;;;;;;802:47:4;445:42;802:47;;;213:1098;;;;;;;;;;;;;;;;",
+  "deployedSourceMap": "213:1098:4:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;939:370;;;;;;;;;;;;;;;;-1:-1:-1;939:370:4;;:::i;:::-;;;1015:9;1005:6;:19;990:97;;;;-1:-1:-1;;;990:97:4;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;1094:26;1191:11;;:113;;;-1:-1:-1;;;1191:113:4;;-1:-1:-1;;;;;1251:12:4;1191:113;;;;;;1131:10;1191:113;;;;;;;;;;;;;;1131:10;;1191:11;;;-1:-1:-1;;1228:9:4;;1191:113;;;;;1094:26;1191:113;;;;;;1228:9;1191:11;:113;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;939:370;;:::o",
+  "source": "// SPDX-License-Identifier: MIT\n\n\npragma solidity 0.6.12;\n\nimport { IWETHGateway } from \"./Interfaces.sol\";\n\n/// @title Native ETH to WETH Converter\n/// @dev Uses Kovan WETH as default\n/// @author Marques Traylor\ncontract WETHConverter {\n  /// @dev wethGateway Contract to convert callers native eth to weth\n  IWETHGateway wethGateway;\n\n  /// @dev All addresses are from the Kovan Public TestNet\n  address constant wETHGatewayProvider = address(0xA61ca04DF33B72b235a8A28CfB535bb7A5271B70);\n  address immutable poolProvider = address(0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe);\n  address immutable WETH = address(0xd0A1E359811322d97991E03f863a0C30C2cF029C);\n\n  /// Address to the WETHGateway Contract\n  /// @dev The FlashApp contract is deployed on the kovan network\n  constructor()\n    public\n  {\n    wethGateway = IWETHGateway(wETHGatewayProvider);\n  }\n\n  /// Allows contract to receive ether payments\n  receive() payable external {}\n\n  function convert(uint amount) public payable {\n    require(\n      amount == msg.value,\n      \"Amount converting is different than amount sent\"\n    );\n\n    address payable onBehalfOf = payable(msg.sender);\n\n    // Deposit the native eth to the pool\n    wethGateway.depositETH{\n      value: msg.value\n    }(\n      poolProvider,\n      onBehalfOf,\n      uint16(0)\n    );\n  }\n}\n",
+  "sourcePath": "/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/WETHConverter.sol",
+  "ast": {
+    "absolutePath": "/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/WETHConverter.sol",
+    "exportedSymbols": {
+      "WETHConverter": [
+        1433
+      ]
+    },
+    "id": 1434,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1355,
+        "literals": [
+          "solidity",
+          "0.6",
+          ".12"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "34:23:4"
+      },
+      {
+        "absolutePath": "/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/Interfaces.sol",
+        "file": "./Interfaces.sol",
+        "id": 1357,
+        "nodeType": "ImportDirective",
+        "scope": 1434,
+        "sourceUnit": 910,
+        "src": "59:48:4",
+        "symbolAliases": [
+          {
+            "foreign": {
+              "argumentTypes": null,
+              "id": 1356,
+              "name": "IWETHGateway",
+              "nodeType": "Identifier",
+              "overloadedDeclarations": [],
+              "referencedDeclaration": null,
+              "src": "68:12:4",
+              "typeDescriptions": {
+                "typeIdentifier": null,
+                "typeString": null
+              }
+            },
+            "local": null
+          }
+        ],
+        "unitAlias": ""
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": {
+          "id": 1358,
+          "nodeType": "StructuredDocumentation",
+          "src": "109:104:4",
+          "text": "@title Native ETH to WETH Converter\n @dev Uses Kovan WETH as default\n @author Marques Traylor"
+        },
+        "fullyImplemented": true,
+        "id": 1433,
+        "linearizedBaseContracts": [
+          1433
+        ],
+        "name": "WETHConverter",
+        "nodeType": "ContractDefinition",
+        "nodes": [
+          {
+            "constant": false,
+            "documentation": {
+              "id": 1359,
+              "nodeType": "StructuredDocumentation",
+              "src": "240:67:4",
+              "text": "@dev wethGateway Contract to convert callers native eth to weth"
+            },
+            "id": 1361,
+            "mutability": "mutable",
+            "name": "wethGateway",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1433,
+            "src": "310:24:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_contract$_IWETHGateway_$909",
+              "typeString": "contract IWETHGateway"
+            },
+            "typeName": {
+              "contractScope": null,
+              "id": 1360,
+              "name": "IWETHGateway",
+              "nodeType": "UserDefinedTypeName",
+              "referencedDeclaration": 909,
+              "src": "310:12:4",
+              "typeDescriptions": {
+                "typeIdentifier": "t_contract$_IWETHGateway_$909",
+                "typeString": "contract IWETHGateway"
+              }
+            },
+            "value": null,
+            "visibility": "internal"
+          },
+          {
+            "constant": true,
+            "documentation": {
+              "id": 1362,
+              "nodeType": "StructuredDocumentation",
+              "src": "339:56:4",
+              "text": "@dev All addresses are from the Kovan Public TestNet"
+            },
+            "id": 1368,
+            "mutability": "constant",
+            "name": "wETHGatewayProvider",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1433,
+            "src": "398:90:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1363,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "398:7:4",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "arguments": [
+                {
+                  "argumentTypes": null,
+                  "hexValue": "307841363163613034444633334237326232333561384132384366423533356262374135323731423730",
+                  "id": 1366,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "number",
+                  "lValueRequested": false,
+                  "nodeType": "Literal",
+                  "src": "445:42:4",
+                  "subdenomination": null,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "value": "0xA61ca04DF33B72b235a8A28CfB535bb7A5271B70"
+                }
+              ],
+              "expression": {
+                "argumentTypes": [
+                  {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                ],
+                "id": 1365,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "lValueRequested": false,
+                "nodeType": "ElementaryTypeNameExpression",
+                "src": "437:7:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_type$_t_address_$",
+                  "typeString": "type(address)"
+                },
+                "typeName": {
+                  "id": 1364,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "437:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": null,
+                    "typeString": null
+                  }
+                }
+              },
+              "id": 1367,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "typeConversion",
+              "lValueRequested": false,
+              "names": [],
+              "nodeType": "FunctionCall",
+              "src": "437:51:4",
+              "tryCall": false,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1374,
+            "mutability": "immutable",
+            "name": "poolProvider",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1433,
+            "src": "492:84:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1369,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "492:7:4",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "arguments": [
+                {
+                  "argumentTypes": null,
+                  "hexValue": "307845306642613446633230396234393438363638303036423262453631373131623766343635624165",
+                  "id": 1372,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "number",
+                  "lValueRequested": false,
+                  "nodeType": "Literal",
+                  "src": "533:42:4",
+                  "subdenomination": null,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "value": "0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe"
+                }
+              ],
+              "expression": {
+                "argumentTypes": [
+                  {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                ],
+                "id": 1371,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "lValueRequested": false,
+                "nodeType": "ElementaryTypeNameExpression",
+                "src": "525:7:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_type$_t_address_$",
+                  "typeString": "type(address)"
+                },
+                "typeName": {
+                  "id": 1370,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "525:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": null,
+                    "typeString": null
+                  }
+                }
+              },
+              "id": 1373,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "typeConversion",
+              "lValueRequested": false,
+              "names": [],
+              "nodeType": "FunctionCall",
+              "src": "525:51:4",
+              "tryCall": false,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "constant": false,
+            "id": 1380,
+            "mutability": "immutable",
+            "name": "WETH",
+            "nodeType": "VariableDeclaration",
+            "overrides": null,
+            "scope": 1433,
+            "src": "580:76:4",
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_address",
+              "typeString": "address"
+            },
+            "typeName": {
+              "id": 1375,
+              "name": "address",
+              "nodeType": "ElementaryTypeName",
+              "src": "580:7:4",
+              "stateMutability": "nonpayable",
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "value": {
+              "argumentTypes": null,
+              "arguments": [
+                {
+                  "argumentTypes": null,
+                  "hexValue": "307864304131453335393831313332326439373939314530336638363361304333304332634630323943",
+                  "id": 1378,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "kind": "number",
+                  "lValueRequested": false,
+                  "nodeType": "Literal",
+                  "src": "613:42:4",
+                  "subdenomination": null,
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  },
+                  "value": "0xd0A1E359811322d97991E03f863a0C30C2cF029C"
+                }
+              ],
+              "expression": {
+                "argumentTypes": [
+                  {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                ],
+                "id": 1377,
+                "isConstant": false,
+                "isLValue": false,
+                "isPure": true,
+                "lValueRequested": false,
+                "nodeType": "ElementaryTypeNameExpression",
+                "src": "605:7:4",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_type$_t_address_$",
+                  "typeString": "type(address)"
+                },
+                "typeName": {
+                  "id": 1376,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "605:7:4",
+                  "typeDescriptions": {
+                    "typeIdentifier": null,
+                    "typeString": null
+                  }
+                }
+              },
+              "id": 1379,
+              "isConstant": false,
+              "isLValue": false,
+              "isPure": true,
+              "kind": "typeConversion",
+              "lValueRequested": false,
+              "names": [],
+              "nodeType": "FunctionCall",
+              "src": "605:51:4",
+              "tryCall": false,
+              "typeDescriptions": {
+                "typeIdentifier": "t_address",
+                "typeString": "address"
+              }
+            },
+            "visibility": "internal"
+          },
+          {
+            "body": {
+              "id": 1390,
+              "nodeType": "Block",
+              "src": "796:58:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "id": 1388,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "leftHandSide": {
+                      "argumentTypes": null,
+                      "id": 1384,
+                      "name": "wethGateway",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 1361,
+                      "src": "802:11:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IWETHGateway_$909",
+                        "typeString": "contract IWETHGateway"
+                      }
+                    },
+                    "nodeType": "Assignment",
+                    "operator": "=",
+                    "rightHandSide": {
+                      "argumentTypes": null,
+                      "arguments": [
+                        {
+                          "argumentTypes": null,
+                          "id": 1386,
+                          "name": "wETHGatewayProvider",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1368,
+                          "src": "829:19:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          }
+                        ],
+                        "id": 1385,
+                        "name": "IWETHGateway",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 909,
+                        "src": "816:12:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_type$_t_contract$_IWETHGateway_$909_$",
+                          "typeString": "type(contract IWETHGateway)"
+                        }
+                      },
+                      "id": 1387,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "kind": "typeConversion",
+                      "lValueRequested": false,
+                      "names": [],
+                      "nodeType": "FunctionCall",
+                      "src": "816:33:4",
+                      "tryCall": false,
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_contract$_IWETHGateway_$909",
+                        "typeString": "contract IWETHGateway"
+                      }
+                    },
+                    "src": "802:47:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_contract$_IWETHGateway_$909",
+                      "typeString": "contract IWETHGateway"
+                    }
+                  },
+                  "id": 1389,
+                  "nodeType": "ExpressionStatement",
+                  "src": "802:47:4"
+                }
+              ]
+            },
+            "documentation": {
+              "id": 1381,
+              "nodeType": "StructuredDocumentation",
+              "src": "661:105:4",
+              "text": "Address to the WETHGateway Contract\n @dev The FlashApp contract is deployed on the kovan network"
+            },
+            "id": 1391,
+            "implemented": true,
+            "kind": "constructor",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 1382,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "780:2:4"
+            },
+            "returnParameters": {
+              "id": 1383,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "796:0:4"
+            },
+            "scope": 1433,
+            "src": "769:85:4",
+            "stateMutability": "nonpayable",
+            "virtual": false,
+            "visibility": "public"
+          },
+          {
+            "body": {
+              "id": 1395,
+              "nodeType": "Block",
+              "src": "933:2:4",
+              "statements": []
+            },
+            "documentation": {
+              "id": 1392,
+              "nodeType": "StructuredDocumentation",
+              "src": "858:45:4",
+              "text": "Allows contract to receive ether payments"
+            },
+            "id": 1396,
+            "implemented": true,
+            "kind": "receive",
+            "modifiers": [],
+            "name": "",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 1393,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "913:2:4"
+            },
+            "returnParameters": {
+              "id": 1394,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "933:0:4"
+            },
+            "scope": 1433,
+            "src": "906:29:4",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "external"
+          },
+          {
+            "body": {
+              "id": 1431,
+              "nodeType": "Block",
+              "src": "984:325:4",
+              "statements": [
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "commonType": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        },
+                        "id": 1405,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "leftExpression": {
+                          "argumentTypes": null,
+                          "id": 1402,
+                          "name": "amount",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1398,
+                          "src": "1005:6:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "nodeType": "BinaryOperation",
+                        "operator": "==",
+                        "rightExpression": {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1403,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "1015:3:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 1404,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "value",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "1015:9:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        },
+                        "src": "1005:19:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "hexValue": "416d6f756e7420636f6e76657274696e6720697320646966666572656e74207468616e20616d6f756e742073656e74",
+                        "id": 1406,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "string",
+                        "lValueRequested": false,
+                        "nodeType": "Literal",
+                        "src": "1032:49:4",
+                        "subdenomination": null,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_stringliteral_d332e394070cb47b75c7dc219e9977d90f879085f36cf82487bd5204e63e2e0f",
+                          "typeString": "literal_string \"Amount converting is different than amount sent\""
+                        },
+                        "value": "Amount converting is different than amount sent"
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_bool",
+                          "typeString": "bool"
+                        },
+                        {
+                          "typeIdentifier": "t_stringliteral_d332e394070cb47b75c7dc219e9977d90f879085f36cf82487bd5204e63e2e0f",
+                          "typeString": "literal_string \"Amount converting is different than amount sent\""
+                        }
+                      ],
+                      "id": 1401,
+                      "name": "require",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [
+                        -18,
+                        -18
+                      ],
+                      "referencedDeclaration": -18,
+                      "src": "990:7:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_require_pure$_t_bool_$_t_string_memory_ptr_$returns$__$",
+                        "typeString": "function (bool,string memory) pure"
+                      }
+                    },
+                    "id": 1407,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "990:97:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1408,
+                  "nodeType": "ExpressionStatement",
+                  "src": "990:97:4"
+                },
+                {
+                  "assignments": [
+                    1410
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 1410,
+                      "mutability": "mutable",
+                      "name": "onBehalfOf",
+                      "nodeType": "VariableDeclaration",
+                      "overrides": null,
+                      "scope": 1431,
+                      "src": "1094:26:4",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_address_payable",
+                        "typeString": "address payable"
+                      },
+                      "typeName": {
+                        "id": 1409,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1094:15:4",
+                        "stateMutability": "payable",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 1416,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 1413,
+                          "name": "msg",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": -15,
+                          "src": "1131:3:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_magic_message",
+                            "typeString": "msg"
+                          }
+                        },
+                        "id": 1414,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "sender",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": null,
+                        "src": "1131:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "id": 1412,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "nodeType": "ElementaryTypeNameExpression",
+                      "src": "1123:8:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_type$_t_address_payable_$",
+                        "typeString": "type(address payable)"
+                      },
+                      "typeName": {
+                        "id": 1411,
+                        "name": "address",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "1123:8:4",
+                        "stateMutability": "payable",
+                        "typeDescriptions": {
+                          "typeIdentifier": null,
+                          "typeString": null
+                        }
+                      }
+                    },
+                    "id": 1415,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "typeConversion",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1123:19:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_address_payable",
+                      "typeString": "address payable"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "1094:48:4"
+                },
+                {
+                  "expression": {
+                    "argumentTypes": null,
+                    "arguments": [
+                      {
+                        "argumentTypes": null,
+                        "id": 1423,
+                        "name": "poolProvider",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1374,
+                        "src": "1251:12:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 1424,
+                        "name": "onBehalfOf",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 1410,
+                        "src": "1271:10:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "arguments": [
+                          {
+                            "argumentTypes": null,
+                            "hexValue": "30",
+                            "id": 1427,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "1296:1:4",
+                            "subdenomination": null,
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": [
+                            {
+                              "typeIdentifier": "t_rational_0_by_1",
+                              "typeString": "int_const 0"
+                            }
+                          ],
+                          "id": 1426,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": true,
+                          "lValueRequested": false,
+                          "nodeType": "ElementaryTypeNameExpression",
+                          "src": "1289:6:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_type$_t_uint16_$",
+                            "typeString": "type(uint16)"
+                          },
+                          "typeName": {
+                            "id": 1425,
+                            "name": "uint16",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "1289:6:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": null,
+                              "typeString": null
+                            }
+                          }
+                        },
+                        "id": 1428,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": true,
+                        "kind": "typeConversion",
+                        "lValueRequested": false,
+                        "names": [],
+                        "nodeType": "FunctionCall",
+                        "src": "1289:9:4",
+                        "tryCall": false,
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        }
+                      }
+                    ],
+                    "expression": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address",
+                          "typeString": "address"
+                        },
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        },
+                        {
+                          "typeIdentifier": "t_uint16",
+                          "typeString": "uint16"
+                        }
+                      ],
+                      "expression": {
+                        "argumentTypes": [
+                          {
+                            "typeIdentifier": "t_address",
+                            "typeString": "address"
+                          },
+                          {
+                            "typeIdentifier": "t_address_payable",
+                            "typeString": "address payable"
+                          },
+                          {
+                            "typeIdentifier": "t_uint16",
+                            "typeString": "uint16"
+                          }
+                        ],
+                        "expression": {
+                          "argumentTypes": null,
+                          "id": 1417,
+                          "name": "wethGateway",
+                          "nodeType": "Identifier",
+                          "overloadedDeclarations": [],
+                          "referencedDeclaration": 1361,
+                          "src": "1191:11:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_contract$_IWETHGateway_$909",
+                            "typeString": "contract IWETHGateway"
+                          }
+                        },
+                        "id": 1419,
+                        "isConstant": false,
+                        "isLValue": false,
+                        "isPure": false,
+                        "lValueRequested": false,
+                        "memberName": "depositETH",
+                        "nodeType": "MemberAccess",
+                        "referencedDeclaration": 877,
+                        "src": "1191:22:4",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_function_external_payable$_t_address_$_t_address_$_t_uint16_$returns$__$",
+                          "typeString": "function (address,address,uint16) payable external"
+                        }
+                      },
+                      "id": 1422,
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": false,
+                      "lValueRequested": false,
+                      "names": [
+                        "value"
+                      ],
+                      "nodeType": "FunctionCallOptions",
+                      "options": [
+                        {
+                          "argumentTypes": null,
+                          "expression": {
+                            "argumentTypes": null,
+                            "id": 1420,
+                            "name": "msg",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": -15,
+                            "src": "1228:3:4",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_magic_message",
+                              "typeString": "msg"
+                            }
+                          },
+                          "id": 1421,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "memberName": "value",
+                          "nodeType": "MemberAccess",
+                          "referencedDeclaration": null,
+                          "src": "1228:9:4",
+                          "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                          }
+                        }
+                      ],
+                      "src": "1191:52:4",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_function_external_payable$_t_address_$_t_address_$_t_uint16_$returns$__$value",
+                        "typeString": "function (address,address,uint16) payable external"
+                      }
+                    },
+                    "id": 1429,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "kind": "functionCall",
+                    "lValueRequested": false,
+                    "names": [],
+                    "nodeType": "FunctionCall",
+                    "src": "1191:113:4",
+                    "tryCall": false,
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_tuple$__$",
+                      "typeString": "tuple()"
+                    }
+                  },
+                  "id": 1430,
+                  "nodeType": "ExpressionStatement",
+                  "src": "1191:113:4"
+                }
+              ]
+            },
+            "documentation": null,
+            "functionSelector": "a3908e1b",
+            "id": 1432,
+            "implemented": true,
+            "kind": "function",
+            "modifiers": [],
+            "name": "convert",
+            "nodeType": "FunctionDefinition",
+            "overrides": null,
+            "parameters": {
+              "id": 1399,
+              "nodeType": "ParameterList",
+              "parameters": [
+                {
+                  "constant": false,
+                  "id": 1398,
+                  "mutability": "mutable",
+                  "name": "amount",
+                  "nodeType": "VariableDeclaration",
+                  "overrides": null,
+                  "scope": 1432,
+                  "src": "956:11:4",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  },
+                  "typeName": {
+                    "id": 1397,
+                    "name": "uint",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "956:4:4",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                }
+              ],
+              "src": "955:13:4"
+            },
+            "returnParameters": {
+              "id": 1400,
+              "nodeType": "ParameterList",
+              "parameters": [],
+              "src": "984:0:4"
+            },
+            "scope": 1433,
+            "src": "939:370:4",
+            "stateMutability": "payable",
+            "virtual": false,
+            "visibility": "public"
+          }
+        ],
+        "scope": 1434,
+        "src": "213:1098:4"
+      }
+    ],
+    "src": "34:1278:4"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/WETHConverter.sol",
+      "exportedSymbols": {
+        "WETHConverter": [
+          1433
+        ]
+      },
+      "license": "MIT"
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "0.6",
+            ".12"
+          ]
+        },
+        "id": 1355,
+        "name": "PragmaDirective",
+        "src": "34:23:4"
+      },
+      {
+        "attributes": {
+          "SourceUnit": 910,
+          "absolutePath": "/Users/traylorboy/Desktop/eidoo/FlashApp/flash-app/contracts/Interfaces.sol",
+          "file": "./Interfaces.sol",
+          "scope": 1434,
+          "symbolAliases": [
+            {
+              "foreign": {
+                "attributes": {
+                  "argumentTypes": null,
+                  "overloadedDeclarations": [
+                    null
+                  ],
+                  "referencedDeclaration": null,
+                  "type": null,
+                  "value": "IWETHGateway"
+                },
+                "id": 1356,
+                "name": "Identifier",
+                "src": "68:12:4"
+              },
+              "local": null
+            }
+          ],
+          "unitAlias": ""
+        },
+        "id": 1357,
+        "name": "ImportDirective",
+        "src": "59:48:4"
+      },
+      {
+        "attributes": {
+          "abstract": false,
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1433
+          ],
+          "name": "WETHConverter",
+          "scope": 1434
+        },
+        "children": [
+          {
+            "attributes": {
+              "text": "@title Native ETH to WETH Converter\n @dev Uses Kovan WETH as default\n @author Marques Traylor"
+            },
+            "id": 1358,
+            "name": "StructuredDocumentation",
+            "src": "109:104:4"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "mutability": "mutable",
+              "name": "wethGateway",
+              "overrides": null,
+              "scope": 1433,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "contract IWETHGateway",
+              "value": null,
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "contractScope": null,
+                  "name": "IWETHGateway",
+                  "referencedDeclaration": 909,
+                  "type": "contract IWETHGateway"
+                },
+                "id": 1360,
+                "name": "UserDefinedTypeName",
+                "src": "310:12:4"
+              },
+              {
+                "attributes": {
+                  "text": "@dev wethGateway Contract to convert callers native eth to weth"
+                },
+                "id": 1359,
+                "name": "StructuredDocumentation",
+                "src": "240:67:4"
+              }
+            ],
+            "id": 1361,
+            "name": "VariableDeclaration",
+            "src": "310:24:4"
+          },
+          {
+            "attributes": {
+              "constant": true,
+              "mutability": "constant",
+              "name": "wETHGatewayProvider",
+              "overrides": null,
+              "scope": 1433,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "address",
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "address",
+                  "stateMutability": "nonpayable",
+                  "type": "address"
+                },
+                "id": 1363,
+                "name": "ElementaryTypeName",
+                "src": "398:7:4"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "isStructConstructorCall": false,
+                  "lValueRequested": false,
+                  "names": [
+                    null
+                  ],
+                  "tryCall": false,
+                  "type": "address",
+                  "type_conversion": true
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "type": "type(address)"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": null
+                        },
+                        "id": 1364,
+                        "name": "ElementaryTypeName",
+                        "src": "437:7:4"
+                      }
+                    ],
+                    "id": 1365,
+                    "name": "ElementaryTypeNameExpression",
+                    "src": "437:7:4"
+                  },
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "hexvalue": "307841363163613034444633334237326232333561384132384366423533356262374135323731423730",
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "subdenomination": null,
+                      "token": "number",
+                      "type": "address payable",
+                      "value": "0xA61ca04DF33B72b235a8A28CfB535bb7A5271B70"
+                    },
+                    "id": 1366,
+                    "name": "Literal",
+                    "src": "445:42:4"
+                  }
+                ],
+                "id": 1367,
+                "name": "FunctionCall",
+                "src": "437:51:4"
+              },
+              {
+                "attributes": {
+                  "text": "@dev All addresses are from the Kovan Public TestNet"
+                },
+                "id": 1362,
+                "name": "StructuredDocumentation",
+                "src": "339:56:4"
+              }
+            ],
+            "id": 1368,
+            "name": "VariableDeclaration",
+            "src": "398:90:4"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "mutability": "immutable",
+              "name": "poolProvider",
+              "overrides": null,
+              "scope": 1433,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "address",
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "address",
+                  "stateMutability": "nonpayable",
+                  "type": "address"
+                },
+                "id": 1369,
+                "name": "ElementaryTypeName",
+                "src": "492:7:4"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "isStructConstructorCall": false,
+                  "lValueRequested": false,
+                  "names": [
+                    null
+                  ],
+                  "tryCall": false,
+                  "type": "address",
+                  "type_conversion": true
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "type": "type(address)"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": null
+                        },
+                        "id": 1370,
+                        "name": "ElementaryTypeName",
+                        "src": "525:7:4"
+                      }
+                    ],
+                    "id": 1371,
+                    "name": "ElementaryTypeNameExpression",
+                    "src": "525:7:4"
+                  },
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "hexvalue": "307845306642613446633230396234393438363638303036423262453631373131623766343635624165",
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "subdenomination": null,
+                      "token": "number",
+                      "type": "address payable",
+                      "value": "0xE0fBa4Fc209b4948668006B2bE61711b7f465bAe"
+                    },
+                    "id": 1372,
+                    "name": "Literal",
+                    "src": "533:42:4"
+                  }
+                ],
+                "id": 1373,
+                "name": "FunctionCall",
+                "src": "525:51:4"
+              }
+            ],
+            "id": 1374,
+            "name": "VariableDeclaration",
+            "src": "492:84:4"
+          },
+          {
+            "attributes": {
+              "constant": false,
+              "mutability": "immutable",
+              "name": "WETH",
+              "overrides": null,
+              "scope": 1433,
+              "stateVariable": true,
+              "storageLocation": "default",
+              "type": "address",
+              "visibility": "internal"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "address",
+                  "stateMutability": "nonpayable",
+                  "type": "address"
+                },
+                "id": 1375,
+                "name": "ElementaryTypeName",
+                "src": "580:7:4"
+              },
+              {
+                "attributes": {
+                  "argumentTypes": null,
+                  "isConstant": false,
+                  "isLValue": false,
+                  "isPure": true,
+                  "isStructConstructorCall": false,
+                  "lValueRequested": false,
+                  "names": [
+                    null
+                  ],
+                  "tryCall": false,
+                  "type": "address",
+                  "type_conversion": true
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "argumentTypes": [
+                        {
+                          "typeIdentifier": "t_address_payable",
+                          "typeString": "address payable"
+                        }
+                      ],
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "type": "type(address)"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "address",
+                          "type": null
+                        },
+                        "id": 1376,
+                        "name": "ElementaryTypeName",
+                        "src": "605:7:4"
+                      }
+                    ],
+                    "id": 1377,
+                    "name": "ElementaryTypeNameExpression",
+                    "src": "605:7:4"
+                  },
+                  {
+                    "attributes": {
+                      "argumentTypes": null,
+                      "hexvalue": "307864304131453335393831313332326439373939314530336638363361304333304332634630323943",
+                      "isConstant": false,
+                      "isLValue": false,
+                      "isPure": true,
+                      "lValueRequested": false,
+                      "subdenomination": null,
+                      "token": "number",
+                      "type": "address payable",
+                      "value": "0xd0A1E359811322d97991E03f863a0C30C2cF029C"
+                    },
+                    "id": 1378,
+                    "name": "Literal",
+                    "src": "613:42:4"
+                  }
+                ],
+                "id": 1379,
+                "name": "FunctionCall",
+                "src": "605:51:4"
+              }
+            ],
+            "id": 1380,
+            "name": "VariableDeclaration",
+            "src": "580:76:4"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": true,
+              "kind": "constructor",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "overrides": null,
+              "scope": 1433,
+              "stateMutability": "nonpayable",
+              "virtual": false,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": "Address to the WETHGateway Contract\n @dev The FlashApp contract is deployed on the kovan network"
+                },
+                "id": 1381,
+                "name": "StructuredDocumentation",
+                "src": "661:105:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1382,
+                "name": "ParameterList",
+                "src": "780:2:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1383,
+                "name": "ParameterList",
+                "src": "796:0:4"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "lValueRequested": false,
+                          "operator": "=",
+                          "type": "contract IWETHGateway"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1361,
+                              "type": "contract IWETHGateway",
+                              "value": "wethGateway"
+                            },
+                            "id": 1384,
+                            "name": "Identifier",
+                            "src": "802:11:4"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "contract IWETHGateway",
+                              "type_conversion": true
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    }
+                                  ],
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 909,
+                                  "type": "type(contract IWETHGateway)",
+                                  "value": "IWETHGateway"
+                                },
+                                "id": 1385,
+                                "name": "Identifier",
+                                "src": "816:12:4"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1368,
+                                  "type": "address",
+                                  "value": "wETHGatewayProvider"
+                                },
+                                "id": 1386,
+                                "name": "Identifier",
+                                "src": "829:19:4"
+                              }
+                            ],
+                            "id": 1387,
+                            "name": "FunctionCall",
+                            "src": "816:33:4"
+                          }
+                        ],
+                        "id": 1388,
+                        "name": "Assignment",
+                        "src": "802:47:4"
+                      }
+                    ],
+                    "id": 1389,
+                    "name": "ExpressionStatement",
+                    "src": "802:47:4"
+                  }
+                ],
+                "id": 1390,
+                "name": "Block",
+                "src": "796:58:4"
+              }
+            ],
+            "id": 1391,
+            "name": "FunctionDefinition",
+            "src": "769:85:4"
+          },
+          {
+            "attributes": {
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "receive",
+              "modifiers": [
+                null
+              ],
+              "name": "",
+              "overrides": null,
+              "scope": 1433,
+              "stateMutability": "payable",
+              "virtual": false,
+              "visibility": "external"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "text": "Allows contract to receive ether payments"
+                },
+                "id": 1392,
+                "name": "StructuredDocumentation",
+                "src": "858:45:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1393,
+                "name": "ParameterList",
+                "src": "913:2:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1394,
+                "name": "ParameterList",
+                "src": "933:0:4"
+              },
+              {
+                "attributes": {
+                  "statements": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1395,
+                "name": "Block",
+                "src": "933:2:4"
+              }
+            ],
+            "id": 1396,
+            "name": "FunctionDefinition",
+            "src": "906:29:4"
+          },
+          {
+            "attributes": {
+              "documentation": null,
+              "functionSelector": "a3908e1b",
+              "implemented": true,
+              "isConstructor": false,
+              "kind": "function",
+              "modifiers": [
+                null
+              ],
+              "name": "convert",
+              "overrides": null,
+              "scope": 1433,
+              "stateMutability": "payable",
+              "virtual": false,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "children": [
+                  {
+                    "attributes": {
+                      "constant": false,
+                      "mutability": "mutable",
+                      "name": "amount",
+                      "overrides": null,
+                      "scope": 1432,
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "type": "uint256",
+                      "value": null,
+                      "visibility": "internal"
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "name": "uint",
+                          "type": "uint256"
+                        },
+                        "id": 1397,
+                        "name": "ElementaryTypeName",
+                        "src": "956:4:4"
+                      }
+                    ],
+                    "id": 1398,
+                    "name": "VariableDeclaration",
+                    "src": "956:11:4"
+                  }
+                ],
+                "id": 1399,
+                "name": "ParameterList",
+                "src": "955:13:4"
+              },
+              {
+                "attributes": {
+                  "parameters": [
+                    null
+                  ]
+                },
+                "children": [],
+                "id": 1400,
+                "name": "ParameterList",
+                "src": "984:0:4"
+              },
+              {
+                "children": [
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_bool",
+                                  "typeString": "bool"
+                                },
+                                {
+                                  "typeIdentifier": "t_stringliteral_d332e394070cb47b75c7dc219e9977d90f879085f36cf82487bd5204e63e2e0f",
+                                  "typeString": "literal_string \"Amount converting is different than amount sent\""
+                                }
+                              ],
+                              "overloadedDeclarations": [
+                                -18,
+                                -18
+                              ],
+                              "referencedDeclaration": -18,
+                              "type": "function (bool,string memory) pure",
+                              "value": "require"
+                            },
+                            "id": 1401,
+                            "name": "Identifier",
+                            "src": "990:7:4"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "commonType": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                              },
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "operator": "==",
+                              "type": "bool"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": 1398,
+                                  "type": "uint256",
+                                  "value": "amount"
+                                },
+                                "id": 1402,
+                                "name": "Identifier",
+                                "src": "1005:6:4"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "value",
+                                  "referencedDeclaration": null,
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -15,
+                                      "type": "msg",
+                                      "value": "msg"
+                                    },
+                                    "id": 1403,
+                                    "name": "Identifier",
+                                    "src": "1015:3:4"
+                                  }
+                                ],
+                                "id": 1404,
+                                "name": "MemberAccess",
+                                "src": "1015:9:4"
+                              }
+                            ],
+                            "id": 1405,
+                            "name": "BinaryOperation",
+                            "src": "1005:19:4"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "hexvalue": "416d6f756e7420636f6e76657274696e6720697320646966666572656e74207468616e20616d6f756e742073656e74",
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "subdenomination": null,
+                              "token": "string",
+                              "type": "literal_string \"Amount converting is different than amount sent\"",
+                              "value": "Amount converting is different than amount sent"
+                            },
+                            "id": 1406,
+                            "name": "Literal",
+                            "src": "1032:49:4"
+                          }
+                        ],
+                        "id": 1407,
+                        "name": "FunctionCall",
+                        "src": "990:97:4"
+                      }
+                    ],
+                    "id": 1408,
+                    "name": "ExpressionStatement",
+                    "src": "990:97:4"
+                  },
+                  {
+                    "attributes": {
+                      "assignments": [
+                        1410
+                      ]
+                    },
+                    "children": [
+                      {
+                        "attributes": {
+                          "constant": false,
+                          "mutability": "mutable",
+                          "name": "onBehalfOf",
+                          "overrides": null,
+                          "scope": 1431,
+                          "stateVariable": false,
+                          "storageLocation": "default",
+                          "type": "address payable",
+                          "value": null,
+                          "visibility": "internal"
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "name": "address",
+                              "stateMutability": "payable",
+                              "type": "address payable"
+                            },
+                            "id": 1409,
+                            "name": "ElementaryTypeName",
+                            "src": "1094:15:4"
+                          }
+                        ],
+                        "id": 1410,
+                        "name": "VariableDeclaration",
+                        "src": "1094:26:4"
+                      },
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "address payable",
+                          "type_conversion": true
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "lValueRequested": false,
+                              "type": "type(address payable)"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "name": "address",
+                                  "stateMutability": "payable",
+                                  "type": null
+                                },
+                                "id": 1411,
+                                "name": "ElementaryTypeName",
+                                "src": "1123:8:4"
+                              }
+                            ],
+                            "id": 1412,
+                            "name": "ElementaryTypeNameExpression",
+                            "src": "1123:8:4"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "member_name": "sender",
+                              "referencedDeclaration": null,
+                              "type": "address payable"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "overloadedDeclarations": [
+                                    null
+                                  ],
+                                  "referencedDeclaration": -15,
+                                  "type": "msg",
+                                  "value": "msg"
+                                },
+                                "id": 1413,
+                                "name": "Identifier",
+                                "src": "1131:3:4"
+                              }
+                            ],
+                            "id": 1414,
+                            "name": "MemberAccess",
+                            "src": "1131:10:4"
+                          }
+                        ],
+                        "id": 1415,
+                        "name": "FunctionCall",
+                        "src": "1123:19:4"
+                      }
+                    ],
+                    "id": 1416,
+                    "name": "VariableDeclarationStatement",
+                    "src": "1094:48:4"
+                  },
+                  {
+                    "children": [
+                      {
+                        "attributes": {
+                          "argumentTypes": null,
+                          "isConstant": false,
+                          "isLValue": false,
+                          "isPure": false,
+                          "isStructConstructorCall": false,
+                          "lValueRequested": false,
+                          "names": [
+                            null
+                          ],
+                          "tryCall": false,
+                          "type": "tuple()",
+                          "type_conversion": false
+                        },
+                        "children": [
+                          {
+                            "attributes": {
+                              "argumentTypes": [
+                                {
+                                  "typeIdentifier": "t_address",
+                                  "typeString": "address"
+                                },
+                                {
+                                  "typeIdentifier": "t_address_payable",
+                                  "typeString": "address payable"
+                                },
+                                {
+                                  "typeIdentifier": "t_uint16",
+                                  "typeString": "uint16"
+                                }
+                              ],
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": false,
+                              "lValueRequested": false,
+                              "names": [
+                                "value"
+                              ],
+                              "type": "function (address,address,uint16) payable external"
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_address",
+                                      "typeString": "address"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_address_payable",
+                                      "typeString": "address payable"
+                                    },
+                                    {
+                                      "typeIdentifier": "t_uint16",
+                                      "typeString": "uint16"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "depositETH",
+                                  "referencedDeclaration": 877,
+                                  "type": "function (address,address,uint16) payable external"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": 1361,
+                                      "type": "contract IWETHGateway",
+                                      "value": "wethGateway"
+                                    },
+                                    "id": 1417,
+                                    "name": "Identifier",
+                                    "src": "1191:11:4"
+                                  }
+                                ],
+                                "id": 1419,
+                                "name": "MemberAccess",
+                                "src": "1191:22:4"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": false,
+                                  "lValueRequested": false,
+                                  "member_name": "value",
+                                  "referencedDeclaration": null,
+                                  "type": "uint256"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "argumentTypes": null,
+                                      "overloadedDeclarations": [
+                                        null
+                                      ],
+                                      "referencedDeclaration": -15,
+                                      "type": "msg",
+                                      "value": "msg"
+                                    },
+                                    "id": 1420,
+                                    "name": "Identifier",
+                                    "src": "1228:3:4"
+                                  }
+                                ],
+                                "id": 1421,
+                                "name": "MemberAccess",
+                                "src": "1228:9:4"
+                              }
+                            ],
+                            "id": 1422,
+                            "name": "FunctionCallOptions",
+                            "src": "1191:52:4"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1374,
+                              "type": "address",
+                              "value": "poolProvider"
+                            },
+                            "id": 1423,
+                            "name": "Identifier",
+                            "src": "1251:12:4"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "overloadedDeclarations": [
+                                null
+                              ],
+                              "referencedDeclaration": 1410,
+                              "type": "address payable",
+                              "value": "onBehalfOf"
+                            },
+                            "id": 1424,
+                            "name": "Identifier",
+                            "src": "1271:10:4"
+                          },
+                          {
+                            "attributes": {
+                              "argumentTypes": null,
+                              "isConstant": false,
+                              "isLValue": false,
+                              "isPure": true,
+                              "isStructConstructorCall": false,
+                              "lValueRequested": false,
+                              "names": [
+                                null
+                              ],
+                              "tryCall": false,
+                              "type": "uint16",
+                              "type_conversion": true
+                            },
+                            "children": [
+                              {
+                                "attributes": {
+                                  "argumentTypes": [
+                                    {
+                                      "typeIdentifier": "t_rational_0_by_1",
+                                      "typeString": "int_const 0"
+                                    }
+                                  ],
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "type": "type(uint16)"
+                                },
+                                "children": [
+                                  {
+                                    "attributes": {
+                                      "name": "uint16",
+                                      "type": null
+                                    },
+                                    "id": 1425,
+                                    "name": "ElementaryTypeName",
+                                    "src": "1289:6:4"
+                                  }
+                                ],
+                                "id": 1426,
+                                "name": "ElementaryTypeNameExpression",
+                                "src": "1289:6:4"
+                              },
+                              {
+                                "attributes": {
+                                  "argumentTypes": null,
+                                  "hexvalue": "30",
+                                  "isConstant": false,
+                                  "isLValue": false,
+                                  "isPure": true,
+                                  "lValueRequested": false,
+                                  "subdenomination": null,
+                                  "token": "number",
+                                  "type": "int_const 0",
+                                  "value": "0"
+                                },
+                                "id": 1427,
+                                "name": "Literal",
+                                "src": "1296:1:4"
+                              }
+                            ],
+                            "id": 1428,
+                            "name": "FunctionCall",
+                            "src": "1289:9:4"
+                          }
+                        ],
+                        "id": 1429,
+                        "name": "FunctionCall",
+                        "src": "1191:113:4"
+                      }
+                    ],
+                    "id": 1430,
+                    "name": "ExpressionStatement",
+                    "src": "1191:113:4"
+                  }
+                ],
+                "id": 1431,
+                "name": "Block",
+                "src": "984:325:4"
+              }
+            ],
+            "id": 1432,
+            "name": "FunctionDefinition",
+            "src": "939:370:4"
+          }
+        ],
+        "id": 1433,
+        "name": "ContractDefinition",
+        "src": "213:1098:4"
+      }
+    ],
+    "id": 1434,
+    "name": "SourceUnit",
+    "src": "34:1278:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.6.12+commit.27d51765.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-06-24T18:36:53.488Z",
+  "devdoc": {
+    "author": "Marques Traylor",
+    "details": "Uses Kovan WETH as default",
+    "kind": "dev",
+    "methods": {
+      "constructor": {
+        "details": "The FlashApp contract is deployed on the kovan network"
+      }
+    },
+    "stateVariables": {
+      "wETHGatewayProvider": {
+        "details": "All addresses are from the Kovan Public TestNet"
+      },
+      "wethGateway": {
+        "details": "wethGateway Contract to convert callers native eth to weth"
+      }
+    },
+    "title": "Native ETH to WETH Converter",
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "constructor": "Address to the WETHGateway Contract"
+    },
+    "version": 1
+  }
+}
