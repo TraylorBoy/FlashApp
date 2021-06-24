@@ -13,17 +13,13 @@ import {
     IWETHGateway
   } from "./Interfaces.sol";
 
-contract FlashAppV2 is FlashLoanReceiverBase {
+contract FlashAppV2 is FlashLoanReceiverBase, WETHConverter {
   using SafeMath for uint256;
-
-  WETHConverter gateway;
 
   constructor(ILendingPoolAddressesProvider provider)
     public
     FlashLoanReceiverBase(provider)
-    {
-      gateway = new WETHConverter();
-    }
+    {}
 
   event LoanInitiated(
     address initiator,

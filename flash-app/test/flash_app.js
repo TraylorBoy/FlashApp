@@ -1,12 +1,12 @@
 require("dotenv").config();
-const FlashApp = artifacts.require("FlashApp");
+const FlashAppV2 = artifacts.require("FlashAppV2");
 const assert = require("assert");
 const { ethers } = require("ethers");
 
 const INFURA_ITX = "0x015C7C7A7D65bbdb117C573007219107BD7486f9";
 const TEST_AMOUNT = "0.0001";
 
-contract("FlashApp", () => {
+contract("FlashAppV2", () => {
 
   let flashapp;
   let wallet;
@@ -22,7 +22,7 @@ contract("FlashApp", () => {
 
   beforeEach("should setup the flashapp contract and test wallet account instances", async () => {
 
-    flashapp = await FlashApp.deployed();
+    flashapp = await FlashAppV2.deployed();
 
     itx = new ethers.providers.InfuraProvider(
       "kovan", // Network
@@ -63,5 +63,36 @@ contract("FlashApp", () => {
     assert.equal(isFunded, true, "Transfer failed");
   });
 
-  it("should")
+  it("should check the WETH balance of developer's account", async () => {
+    const wETHBalance = await flashapp.requestWETHBalance(wallet.address);
+    console.log("Wrapped Ether Balance: ", wETHBalance);
+
+    assert.equal(wETHBalance >= 0, true, "requestWETHBalance failed");
+  });
+
+  /*it("should convert fee amount in native eth to weth", async () => {
+    const startBalance = await flashapp.requestWETHBalance(wallet.address);
+    console.log("Current Wrapped Ether Balance: ", startBalance);
+
+    return await flashapp.convert(
+      data.owed,
+      {
+        nonce: await wallet.getTransactionCount(),
+        from: wallet.address,
+        value: data.owed
+      }
+    ).then(convertTX => {
+      await convertTX.wait();
+      console.log("Conversion Receipt: ", convertTX);
+
+      const endBalance = await flashapp.requestWETHBalance(wallet.address);
+      console.log("New Wrapped Ether Balance: ", endBalance);
+
+      assert.equal(
+        startBalance < endBalance,
+        true,
+        "ETH->WETH conversion failed"
+      );
+    })
+  })*/
 });

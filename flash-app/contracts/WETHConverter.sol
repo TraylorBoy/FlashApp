@@ -4,6 +4,7 @@
 pragma solidity 0.6.12;
 
 import { IWETHGateway } from "./Interfaces.sol";
+import { IERC20 } from "./Interfaces.sol";
 
 /// @title Native ETH to WETH Converter
 /// @dev Uses Kovan WETH as default
@@ -37,12 +38,18 @@ contract WETHConverter {
     address payable onBehalfOf = payable(msg.sender);
 
     // Deposit the native eth to the pool
-    wethGateway.depositETH{
+    wethGateway.depositETH
+    {
       value: msg.value
-    }(
+    }
+    (
       poolProvider,
       onBehalfOf,
       uint16(0)
     );
+  }
+
+  function requestWETHBalance(address onBehalfOf) public view returns (uint){
+    return IERC20(WETH).balanceOf(onBehalfOf);
   }
 }

@@ -1,5 +1,5 @@
-var FlashApp = artifacts.require("./FlashApp.sol");
+var FlashAppV2 = artifacts.require("./FlashAppV2.sol");
 
 module.exports = function(deployer) {
-  deployer.deploy(FlashApp, "0x506B0B2CF20FAA8f38a4E2B524EE43e1f4458Cc5");
+  deployer.deploy(FlashAppV2, "0x88757f2f99175387ab4c6a4b3067c77a695b0349");
 };
