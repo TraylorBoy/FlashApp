@@ -40,40 +40,30 @@ function FlashLoan() {
       }
 
       // TODO - Setup middleware
-      if (flag === 91) {
-
-      }
+      if (flag === 91) {}
 
     }
-  }, [depositAmount, flag, locked, lock, loanAmount]);
+  }, [depositAmount, flag, locked, lock]);
 
   const handleStart = () => {
-    try {
-      // Make sure user has enough funds to cover premium
-      if (parseFloat(wallet.balance) > parseFloat(depositAmount)) {
-        setLock(0); // Lock state
-        setFlag(91); // Setup middleware
+    // Make sure user has enough funds to cover premium
+    if (parseFloat(wallet.balance) > parseFloat(depositAmount)) {
+      setLock(0); // Lock state
+      setFlag(91); // Setup middleware
 
-        const sender = wallet.address;
-        const balance = wallet.balance;
+      const sender = wallet.address;
+      const balance = wallet.balance;
 
-        startFlashLoan({
-          sender,
-          balance,
-          depositAmount,
-          loanAmount,
-          token
-        });
-      } else {
-        // TODO - Remove alert and make component
-        alert("Unfortunately, the balance in your wallet is not enough to cover the premium required to receive an Aave FlashLoan. Please add funds to your wallet and try again! ");
-      }
-    } catch (err) {
-      // Error unlock state
-      setFlag(104);
-
-      // TODO handle
-
+      startFlashLoan({
+        sender,
+        balance,
+        depositAmount,
+        loanAmount,
+        token
+      });
+    } else {
+      // TODO - Remove alert and make component
+      alert("Unfortunately, the balance in your wallet is not enough to cover the premium required to receive an Aave FlashLoan. Please add funds to your wallet and try again! ");
     }
 
   };

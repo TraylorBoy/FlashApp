@@ -6,9 +6,10 @@ pragma solidity 0.6.6;
 import { ILendingPool, ILendingPoolAddressesProvider, IERC20 } from "./Interfaces.sol";
 import { FlashLoanReceiverBase } from "./FlashLoanReceiverBase.sol";
 
-/// @title A contract that receives an Aave FlashLoan, emits an event, then 	pays back the loan
+/// @title A contract for Aave FlashLoan interaction
 /// @author Marques Traylor
 /// @notice Contract is using Aave v1
+/// @dev User deposits fee, contract performs flash loan, left over balance automatically withdrawn from contract and sent back to user
 contract FlashApp is FlashLoanReceiverBase {
 	/// @notice Aave V1 contract addresses may be found here - https://docs.aave.com/developers/v/1.0/deployed-contracts/deployed-contract-instances
 	/// @dev Pass the address as a parameter to deployer in migrations along with the contract
@@ -18,6 +19,18 @@ contract FlashApp is FlashLoanReceiverBase {
         FlashLoanReceiverBase(_addressProvider)
     {
     }
+
+	/// Allows contract to receive ether
+  receive() payable external virtual override {}
+
+	/// Emits when initiateFlashLoan is called and flashLoan has been successfully called on lendingPool
+	/// @notice Will not emit if required fee is not deposited first
+	/// @param reserve Token address for the asset User wants to loan
+	/// @param amount Amount of reserve to request for the loan
+	event LoanInitiated(
+        address reserve,
+        uint256 amount
+    );
 
 	/// Emits when lendingPool calls our executeOperation override and the loan was successfully received
 	/// @notice Will not emit if loan was not received
@@ -30,10 +43,16 @@ contract FlashApp is FlashLoanReceiverBase {
         uint256 fee
     );
 
-	/// Emits after loan has been received and operation has been completed, and the debt has been paid back
+	/// Emits after loan has been received and operation has been completed, the debt has been paid back, and user's account balance has been updated
 	/// @notice Will not emit if the operation process fails
-	/// @param successful Debt paid back and loan completed successfully
-	event LoanCompleted(bool successful);
+	/// @param reserve Token address for the asset User wants to loan
+	/// @param amount Amount of reserve to request for the loan
+	/// @param fee Premium associated with the loan
+	event LoanCompleted(
+        address reserve,
+        uint256 amount,
+        uint256 fee
+    );
 
   /**
 	Once flash loan is received, this method is excuted and after flashloan operation is completed, the amount + fee is paid back to the lending pool.
@@ -56,20 +75,24 @@ contract FlashApp is FlashLoanReceiverBase {
             "Invalid balance, was the loan successful?"
         );
 
-		// Loan received successfully
+		// Loan received
 		emit LoanExecuted(_reserve, _amount, _fee);
 
 		// Pay debt back to lending pool (amount owed + fee)
-		uint totalDebt = _amount.add(_fee);
+		uint totalDebt = _amount + _fee;
 		transferFundsBackToPoolInternal(_reserve, totalDebt);
 
-		// Loan paid back successfully
-		emit LoanCompleted(true);
+		// Loan paid back
+		emit LoanCompleted(
+            _reserve,
+						_amount,
+            _fee
+        );
 	}
 
   /// Attempt to retrieve a flashloan for requested amount
 	/// @notice Uses Aave V1 which only requires 1 asset address to be passed
-	/// @dev Caller must deposit premium before requesting a FlashLoan, they may send it along with this method call
+	/// @dev Caller must deposit premium before requesting a FlashLoan
 	/// @param token Token address for the asset User wants to loan
 	/// @param amount Amount of token to request for the loan
 	function initiateFlashLoan(address token, uint256 amount) public onlyOwner {
