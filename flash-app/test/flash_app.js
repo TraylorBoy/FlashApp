@@ -36,7 +36,7 @@ contract("FlashApp", () => {
     data.amount = ethers.BigNumber.from(parser(TEST_AMOUNT, "ether"));
     data.fee = ethers.BigNumber.from(9);
     data.owed = parser((data.amount.mul(data.fee).div(10000)).toString(), "wei");
-    data.forAmount = parser(data.amount.toString(), "wei");
+    data.forAmount = parser(data.amount.toString(), "ether");
     data.token = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"; // Kovan Eth
   });
 
@@ -63,7 +63,6 @@ contract("FlashApp", () => {
     assert.equal(isFunded, true, "Transfer failed");
   });
 
-
   it("should deposit fee to the contract", async () => {
     // Deposit the fee to the contract
     return await wallet.sendTransaction({
@@ -82,30 +81,46 @@ contract("FlashApp", () => {
 
       console.log("Contract Balance: " + etherBalance);
       assert.equal(etherBalance >= data.owed, true, "Deposit failed");
+    });
   });
 
-  /*it("should perform flashloan then emit event LoanExecuted(reverse, amount, fee), pay back loan and emit event LoanCompleted(true/false)", async () => {
-    console.log("Depositing amount: " + owed + " to contract at: " + flashapp.address);
-
-    // Grab initial balance
-    const startBalance = await wallet.getBalance();
-    let txCount = await wallet.getTransactionCount();
-
+  it("should perform flashloan then emit event LoanExecuted(reverse, amount, fee), pay back loan and emit event LoanCompleted(true/false)", async () => {
     console.log("Requesting contract to start the loan operation");
-    txCount = await wallet.getTransactionCount();
-    return await flashapp.requestLoan(
-      token,
-      forAmount,
+    const balance = await flashapp.getBalance({
+      from: wallet.address
+    });
+    const etherBalance = parser(balance.toString(), "ether");
+
+    console.log("Contract Balance: " + etherBalance);
+
+    if (!(etherBalance >= data.owed)) {
+      // Deposit funds
+      await wallet.sendTransaction({
+        nonce: await wallet.getTransactionCount(),
+        to: flashapp.address,
+        value: data.owed
+      })
+      .then(async (depositTX) => {
+        console.log("Deposit receipt: ", depositTX, "\n Waiting for it to be mined");
+        await depositTX.wait();
+      });
+    }
+
+    await flashapp.requestLoan(
+      data.token,
+      data.forAmount,
       {
-        nonce: txCount,
+        nonce: await wallet.getTransactionCount(),
         from: wallet.address
       }
-    )
-    .then(async (loanTX) => {
-      console.log("FlashLoan receipt: ", loanTX);
-      const currentBalance = await itx.send("relay_getBalance", [wallet.address]);
+    );
 
-      assert.equal(startBalance.balance >= currentBalance.balance, "Loan failed to complete.");
-    });*/
-  });
+    const endBalance = await flashapp.getBalance({
+      from: wallet.address
+    });
+    const endEtherBalance = parser(endBalance.toString(), "ether");
+
+    console.log("Contract Balance: " + endEtherBalance);
+    assert.equal(endEtherBalance < data.owed, true, "FlashLoan failed");
+  })
 });

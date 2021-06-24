@@ -52,7 +52,7 @@ contract FlashApp is FlashLoanReceiverBase {
         override
     {
 		require(
-            _amount <= getBalanceInternal(msg.sender, _reserve),
+            _amount <= getBalanceInternal(payable(address(this)), _reserve),
             "Invalid balance, was the loan successful?"
         );
 
@@ -60,7 +60,7 @@ contract FlashApp is FlashLoanReceiverBase {
 		emit LoanExecuted(_reserve, _amount, _fee);
 
 		// Pay debt back to lending pool (amount owed + fee)
-		uint totalDebt = _amount.add(_fee);
+		uint totalDebt = _amount + _fee;
 		transferFundsBackToPoolInternal(_reserve, totalDebt);
 
 		// Loan paid back successfully
@@ -80,7 +80,7 @@ contract FlashApp is FlashLoanReceiverBase {
 		ILendingPool lendingPool = ILendingPool(addressesProvider.getLendingPool());
 
 		// Request loan for amount of token
-		lendingPool.flashLoan(address(this), token, amount, params);
+		lendingPool.flashLoan(payable(address(this)), token, amount, params);
 	}
 
 	/// Returns the current contract balance to the caller
