@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.6;
+pragma solidity 0.6.6;
 
 import { SafeMath, SafeERC20 } from "./Libraries.sol";
 import { ILendingPoolAddressesProvider, IFlashLoanReceiver, IERC20 } from "./Interfaces.sol";
