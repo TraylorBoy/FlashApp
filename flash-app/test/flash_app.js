@@ -65,7 +65,7 @@ contract("FlashAppV2", () => {
 
   it("should check the WETH balance of developer's account", async () => {
     const wETHBalance = await flashapp.requestWETHBalance(wallet.address);
-    console.log("Wrapped Ether Balance: ", wETHBalance);
+    console.log("Wrapped Ether Balance: " + wETHBalance);
 
     assert.equal(wETHBalance >= 0, true, "requestWETHBalance failed");
   });
